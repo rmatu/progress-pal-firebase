@@ -1,13 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
+
 import * as serviceWorker from './serviceWorker';
 
+import { ThemeProvider } from 'styled-components';
+import theme from './theme/theme';
+import GlobalStyles from './theme/global';
+
+import { BrowserRouter } from 'react-router-dom';
+
+import { Provider, useSelector } from 'react-redux';
+import { ReactReduxFirebaseProvider, isLoaded } from 'react-redux-firebase';
+
+import { rffProps } from './redux/store';
+
+import store from './redux/store';
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <ReactReduxFirebaseProvider {...rffProps}>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <GlobalStyles />
+          <App />
+        </ThemeProvider>
+      </BrowserRouter>
+    </ReactReduxFirebaseProvider>
+  </Provider>,
   document.getElementById('root')
 );
 
