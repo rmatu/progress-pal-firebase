@@ -40,8 +40,19 @@ export const BottomTextWrapper = styled.div`
   margin-top: 2rem;
   display: flex;
   justify-content: center;
+  align-content: flex-end;
   p {
     color: ${(props) => props.theme.secondaryTextColor};
+  }
+  span {
+    color: ${(props) => props.theme.specialTextColor};
+    font-weight: 700;
+    margin-left: 0.5rem;
+    transition: all 0.15s;
+    cursor: pointer;
+    &:active {
+      transform: translateY(2px);
+    }
   }
 `;
 
@@ -65,7 +76,6 @@ export const ArrowWrapper = styled.div`
 `;
 
 export const SpanWrapper = styled.div`
-  text-decoration: none;
   color: ${(props) => props.theme.specialTextColor};
   font-weight: 700;
   margin-left: 0.5rem;
@@ -74,4 +84,5 @@ export const SpanWrapper = styled.div`
   &:active {
     transform: translateY(2px);
   }
+  text-decoration: none;
 `;

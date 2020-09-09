@@ -3,8 +3,9 @@ import 'styled-components';
 declare module 'styled-components' {
   export interface DefaultTheme {
     leftSidebarBackground: string;
-    mainContentBackgorund: string;
+    mainContentBackground: string;
     rightSidebarBackground: string;
+    inputBackground: string;
     modalBackground: string;
     primaryTextColor: string;
     secondaryTextColor: string;

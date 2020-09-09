@@ -6,6 +6,6 @@ export const MainWrapper = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => props.theme.mainContentBackgorund};
+  background-color: ${(props) => props.theme.mainContentBackground};
   color: ${(props) => props.theme.primaryTextColor};
 `;

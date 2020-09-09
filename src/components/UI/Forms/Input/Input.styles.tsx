@@ -22,7 +22,7 @@ export const IconWrapper = styled.div`
 export const Wrapper = styled.div`
   margin-top: 2rem;
   width: 100%;
-  background-color: #38304c;
+  background-color: ${(props) => props.theme.inputBackground};
   border-radius: 2rem;
   padding: 1rem;
   font-weight: 700;

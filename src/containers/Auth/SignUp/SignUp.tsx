@@ -14,6 +14,7 @@ import {
   TextWrapper,
   BottomTextWrapper,
   ArrowWrapper,
+  SpanWrapper,
 } from './SignUp.styles';
 import Heading from '../../../components/UI/Headings/Heading';
 import Input from '../../../components/UI/Forms/Input/Input';
@@ -109,7 +110,9 @@ const SignUp: React.FC<SignUpProps> = () => {
           </ContentWrapper>
           <BottomTextWrapper>
             <p>Already have an account? </p>
-            <span>Sign in</span>
+            <NavLink exact to="/login">
+              <SpanWrapper>Sign in</SpanWrapper>
+            </NavLink>
           </BottomTextWrapper>
         </FormWrapper>
       )}

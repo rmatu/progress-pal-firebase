@@ -1,8 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap');
-
  /* Box sizing rules */
 *,
 *::before,
@@ -78,8 +76,9 @@ select {
 
 html{
   --leftSidebarBackground: ${(props) => props.theme.leftSidebarBackground}
-  --mainContentBackground: ${(props) => props.theme.mainContentBackgorund}
+  --mainContentBackground: ${(props) => props.theme.mainContentBackground}
   --rightSidebarBackground: ${(props) => props.theme.rightSidebarBackground}
+  --inputBackground: ${(props) => props.theme.inputBackground}
   --modalBackground: ${(props) => props.theme.modalBackground}
   --primaryTextColor: ${(props) => props.theme.primaryTextColor}
   --shadow: ${(props) => props.theme.shadow}
@@ -101,4 +100,7 @@ input:-webkit-autofill,
     -webkit-text-fill-color: white;
   }
 
+  a {
+    text-decoration: none;
+}
 `;
