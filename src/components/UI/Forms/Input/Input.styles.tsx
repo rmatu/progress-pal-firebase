@@ -29,3 +29,21 @@ export const Wrapper = styled.div`
   position: relative;
   transition: all 0.1s ease;
 `;
+
+interface ErrorProps {
+  show: string;
+}
+
+export const Error = styled.div<ErrorProps>`
+  color: #ff5757;
+  padding: 0rem 2rem;
+  visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
+  opacity: ${({ show }) => (show ? '1' : '0')};
+  transform: translateY(${({ show }) => (show ? '25px' : '10px')});
+  transition: all 0.1s;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-weight: 700;
+  font-size: 1rem;
+`;

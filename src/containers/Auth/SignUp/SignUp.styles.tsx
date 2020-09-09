@@ -47,14 +47,27 @@ export const BottomTextWrapper = styled.div`
     color: ${(props) => props.theme.specialTextColor};
     font-weight: 700;
     margin-left: 0.5rem;
+    transition: all 0.15s;
+    cursor: pointer;
+    &:active {
+      transform: translateY(2px);
+    }
   }
 `;
 
 export const ArrowWrapper = styled.div`
   position: absolute;
-  top: 2rem;
-  left: 2rem;
-
+  top: 3rem;
+  left: 3rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: ${(props) => props.theme.secondaryTextColor};
+  &:hover {
+    color: ${(props) => props.theme.specialTextColor};
+  }
+  &:active {
+    transform: translateY(2px);
+  }
   svg {
     height: 2.5rem;
     width: 2.5rem;

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Formik, Field } from 'formik';
-
 import * as Yup from 'yup';
+import { NavLink } from 'react-router-dom';
 
 //UI imports
 import { RiUserAddLine, RiLockPasswordLine, RiUserLine } from 'react-icons/ri';
@@ -15,19 +15,15 @@ import {
   BottomTextWrapper,
   ArrowWrapper,
 } from './SignUp.styles';
-import Heading from '../../components/UI/Headings/Heading';
-import Input from '../../components/UI/Forms/Input/Input';
-import Button from '../../components/UI/Button/Button';
+import Heading from '../../../components/UI/Headings/Heading';
+import Input from '../../../components/UI/Forms/Input/Input';
+import Button from '../../../components/UI/Button/Button';
 
 interface SignUpProps {}
 
 const SignUpSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .required('Your first name is required.')
-    .min(3, 'Too short.')
-    .max(25, 'Too long.'),
-  lastName: Yup.string()
-    .required('Your last name is required.')
+  nickname: Yup.string()
+    .required('Your nickname is required.')
     .min(3, 'Too short.')
     .max(25, 'Too long.'),
   email: Yup.string()
@@ -58,10 +54,13 @@ const SignUp: React.FC<SignUpProps> = () => {
       }}
     >
       {({ isSubmitting, isValid }) => (
+        //@ts-ignore
         <FormWrapper>
-          <ArrowWrapper>
-            <BsArrowLeft />
-          </ArrowWrapper>
+          <NavLink exact to="/login">
+            <ArrowWrapper>
+              <BsArrowLeft />
+            </ArrowWrapper>
+          </NavLink>
           <IconWrapper>
             <RiUserAddLine />
           </IconWrapper>
@@ -74,7 +73,7 @@ const SignUp: React.FC<SignUpProps> = () => {
             </TextWrapper>
             <Field
               type="text"
-              name="nickName"
+              name="nickname"
               placeholder="Nickname"
               component={Input}
             >
@@ -82,7 +81,7 @@ const SignUp: React.FC<SignUpProps> = () => {
             </Field>
             <Field
               type="email"
-              name="nickname"
+              name="email"
               placeholder="Email"
               component={Input}
             >

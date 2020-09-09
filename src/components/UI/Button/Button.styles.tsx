@@ -21,6 +21,7 @@ export const StyledButton = styled.button<Props>`
   font-weight: 700;
   box-shadow: 0rem 0.5rem 3.5rem ${(props) => props.theme.shadow};
   border: none;
+  cursor: pointer;
 
   background-color: ${(props) => {
     if (props.color === 'main') {
