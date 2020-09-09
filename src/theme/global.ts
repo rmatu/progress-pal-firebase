@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap');
+
  /* Box sizing rules */
 *,
 *::before,
@@ -39,7 +41,7 @@ body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
 
-  font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     line-height: 1.6;
 }
@@ -79,5 +81,24 @@ html{
   --mainContentBackground: ${(props) => props.theme.mainContentBackgorund}
   --rightSidebarBackground: ${(props) => props.theme.rightSidebarBackground}
   --modalBackground: ${(props) => props.theme.modalBackground}
+  --primaryTextColor: ${(props) => props.theme.primaryTextColor}
+  --shadow: ${(props) => props.theme.shadow}
+  --specialTextColor: ${(props) => props.theme.specialTextColor}
 }
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: white;
+  }
+
 `;

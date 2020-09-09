@@ -6,5 +6,9 @@ declare module 'styled-components' {
     mainContentBackgorund: string;
     rightSidebarBackground: string;
     modalBackground: string;
+    primaryTextColor: string;
+    secondaryTextColor: string;
+    specialTextColor: string;
+    shadow: string;
   }
 }
