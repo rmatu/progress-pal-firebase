@@ -39,6 +39,9 @@ export const ContentWrapper = styled.div`
 export const BottomTextWrapper = styled.div`
   margin-top: 2rem;
   display: flex;
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
   justify-content: center;
   p {
     color: ${(props) => props.theme.secondaryTextColor};

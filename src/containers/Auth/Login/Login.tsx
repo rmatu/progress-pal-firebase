@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { NavLink } from 'react-router-dom';
@@ -14,6 +14,7 @@ import {
   TextWrapper,
   BottomTextWrapper,
   SpanWrapper,
+  ForgotPasswordWrapper,
 } from './Login.styles';
 import Heading from '../../../components/UI/Headings/Heading';
 import Input from '../../../components/UI/Forms/Input/Input';
@@ -72,16 +73,18 @@ const Login: React.FC<LoginProps> = () => {
             >
               <RiLockPasswordLine />
             </Field>
-
-            <Button color={'main'} disabled={false} loading={false}>
-              Login
-            </Button>
           </ContentWrapper>
+          <Button color={'main'} disabled={false}>
+            Login
+          </Button>
+          <ForgotPasswordWrapper>
+            <SpanWrapper center>Forgot Password?</SpanWrapper>
+          </ForgotPasswordWrapper>
 
           <BottomTextWrapper>
             <p>Don't have an account? </p>
             <NavLink exact to="/signup">
-              <SpanWrapper>Sign up</SpanWrapper>
+              <SpanWrapper bold>Sign up</SpanWrapper>
             </NavLink>
           </BottomTextWrapper>
         </FormWrapper>

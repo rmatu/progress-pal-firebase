@@ -5,26 +5,19 @@ import { StyledButton, Wrapper } from './Button.styles';
 interface ButtonProps {
   children: React.ReactNode[] | React.ReactNode;
   color: string;
-  loading: boolean;
   disabled: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
   color,
-  loading,
-  disabled = false,
+  disabled,
   ...rest
 }) => {
   return (
     <Wrapper>
-      <StyledButton
-        disabled={disabled}
-        loading={loading}
-        color={color}
-        {...rest}
-      >
-        {loading ? loading : children}
+      <StyledButton disabled={disabled} color={color} {...rest}>
+        {children}
       </StyledButton>
     </Wrapper>
   );

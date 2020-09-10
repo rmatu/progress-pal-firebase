@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 //UI imports
 import { RiUserAddLine, RiLockPasswordLine, RiUserLine } from 'react-icons/ri';
@@ -19,8 +20,11 @@ import {
 import Heading from '../../../components/UI/Headings/Heading';
 import Input from '../../../components/UI/Forms/Input/Input';
 import Button from '../../../components/UI/Button/Button';
-
-interface SignUpProps {}
+import { AppState } from '../../../redux/rootReducer';
+import * as authActions from '../../../redux/auth/authActions';
+import { ThunkDispatch } from 'redux-thunk';
+import { AppActions } from '../../../redux/actions';
+import { bindActionCreators, $CombinedState } from 'redux';
 
 const SignUpSchema = Yup.object().shape({
   nickname: Yup.string()
@@ -32,7 +36,7 @@ const SignUpSchema = Yup.object().shape({
     .required('The email is required.'),
   password: Yup.string()
     .required('The password is required.')
-    .min(8, 'The password is to short'),
+    .min(1, 'The password is to short'),
   confirmPassword: Yup.string()
     //Getting the reference to the password
     //@ts-ignore
@@ -40,7 +44,17 @@ const SignUpSchema = Yup.object().shape({
     .required('You need to confirm your password.'),
 });
 
-const SignUp: React.FC<SignUpProps> = () => {
+export interface SignUpFormTypes {
+  nickname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+interface SignUpProps {
+  signUp: (data: SignUpFormTypes) => void;
+}
+const SignUp: React.FC<SignUpProps> = ({ signUp }) => {
   return (
     <Formik
       initialValues={{
@@ -50,12 +64,13 @@ const SignUp: React.FC<SignUpProps> = () => {
         confirmPassword: '',
       }}
       validationSchema={SignUpSchema}
-      onSubmit={async (values, { setSubmitting }) => {
+      onSubmit={async (values: SignUpFormTypes, { setSubmitting }) => {
+        console.log('im here');
+        await signUp(values);
         setSubmitting(false);
       }}
     >
-      {({ isSubmitting, isValid }) => (
-        //@ts-ignore
+      {({ isSubmitting, isValid, values, errors, isValidating }) => (
         <FormWrapper>
           <NavLink exact to="/login">
             <ArrowWrapper>
@@ -89,7 +104,7 @@ const SignUp: React.FC<SignUpProps> = () => {
               <AiOutlineMail />
             </Field>
             <Field
-              type="text"
+              type="password"
               name="password"
               placeholder="Password"
               component={Input}
@@ -97,14 +112,21 @@ const SignUp: React.FC<SignUpProps> = () => {
               <RiLockPasswordLine />
             </Field>
             <Field
-              type="text"
-              name="password"
+              type="password"
+              name="confirmPassword"
               placeholder="Confrim Password"
               component={Input}
             >
               <RiLockPasswordLine />
             </Field>
-            <Button color={'main'} disabled={false} loading={false}>
+            <Button
+              color={'main'}
+              disabled={!isValid || isSubmitting}
+              // onClick={() =>
+              //   console.log({ values, isValid, errors, isValidating })
+              // }
+              // type="submit"
+            >
               Sign Up
             </Button>
           </ContentWrapper>
@@ -120,4 +142,10 @@ const SignUp: React.FC<SignUpProps> = () => {
   );
 };
 
-export default SignUp;
+const mapStateToProps = (state: AppState, ownProps: SignUpProps) => ({});
+
+const mapDispatchToProps = {
+  signUp: authActions.signUp,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

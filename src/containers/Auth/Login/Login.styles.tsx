@@ -30,7 +30,7 @@ export const TextWrapper = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  margin: 0 2rem;
+  margin: 3rem 2rem 4rem 2rem;
   p {
     color: ${(props) => props.theme.secondaryTextColor};
   }
@@ -40,19 +40,11 @@ export const BottomTextWrapper = styled.div`
   margin-top: 2rem;
   display: flex;
   justify-content: center;
-  align-content: flex-end;
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
   p {
     color: ${(props) => props.theme.secondaryTextColor};
-  }
-  span {
-    color: ${(props) => props.theme.specialTextColor};
-    font-weight: 700;
-    margin-left: 0.5rem;
-    transition: all 0.15s;
-    cursor: pointer;
-    &:active {
-      transform: translateY(2px);
-    }
   }
 `;
 
@@ -75,9 +67,9 @@ export const ArrowWrapper = styled.div`
   }
 `;
 
-export const SpanWrapper = styled.div`
+export const SpanWrapper = styled.div<{ bold?: any; center?: any }>`
   color: ${(props) => props.theme.specialTextColor};
-  font-weight: 700;
+  font-weight: ${(props) => (props.bold ? 700 : 500)};
   margin-left: 0.5rem;
   transition: all 0.15s;
   cursor: pointer;
@@ -85,4 +77,10 @@ export const SpanWrapper = styled.div`
     transform: translateY(2px);
   }
   text-decoration: none;
+`;
+
+export const ForgotPasswordWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 0.4rem;
 `;

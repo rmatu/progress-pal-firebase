@@ -1,10 +1,11 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import SignUp from './containers/Auth/SignUp/SignUp';
 import Login from './containers/Auth/Login/Login';
-
 import Layout from './hoc/layout/Layout';
+
 const App: React.FC = ({ loggedIn, emailVerified }: any) => {
   let routes;
 
