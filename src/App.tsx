@@ -5,11 +5,13 @@ import { connect } from 'react-redux';
 import SignUp from './containers/Auth/SignUp/SignUp';
 import Login from './containers/Auth/Login/Login';
 import Layout from './hoc/layout/Layout';
+import VerifyEmail from './containers/Auth/VerifyEmail/VerifyEmail';
 
 const App: React.FC = ({ loggedIn, emailVerified }: any) => {
   let routes;
-
-  if (loggedIn) {
+  if (loggedIn && !emailVerified) {
+    routes = <VerifyEmail />;
+  } else if (loggedIn && emailVerified) {
     routes = <p>You are logged in</p>;
   } else if (!loggedIn && !emailVerified) {
     routes = (

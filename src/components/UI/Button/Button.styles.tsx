@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 interface Props {
   color: string;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export const Wrapper = styled.div`

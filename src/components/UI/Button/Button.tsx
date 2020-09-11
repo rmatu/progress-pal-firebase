@@ -5,7 +5,7 @@ import { StyledButton, Wrapper } from './Button.styles';
 interface ButtonProps {
   children: React.ReactNode[] | React.ReactNode;
   color: string;
-  disabled: boolean;
+  disabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const FormWrapper = styled.div`
   min-width: 30rem;
   min-height: 50rem;
-  background-color: #201a30;
+  background-color: ${(props) => props.theme.modalBackground};
   border-radius: 1rem;
   -webkit-box-shadow: 10px 3px 19px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 3px 19px 0px rgba(0, 0, 0, 0.75);

@@ -4,15 +4,24 @@ import * as actions from './authTypes';
 const authDefaultState: AuthState = {
   error: null,
   loading: false,
+  verifyEmail: {
+    error: null,
+    loading: false,
+  },
 };
 
 export default (state = authDefaultState, action: AuthActionTypes) => {
   switch (action.type) {
-    case actions.SIGN_UP_CLEAN_UP:
+    case actions.AUTH_CLEAN_UP:
       return {
         ...state,
         error: null,
         loading: false,
+        verifyEmail: {
+          ...state.verifyEmail,
+          loading: false,
+          error: null,
+        },
       };
     case actions.SIGN_UP_START:
       return {
@@ -34,6 +43,7 @@ export default (state = authDefaultState, action: AuthActionTypes) => {
         ...state,
         error: action.payload,
       };
+
     default:
       return state;
   }

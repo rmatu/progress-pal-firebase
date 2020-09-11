@@ -6,7 +6,6 @@ import { NavLink } from 'react-router-dom';
 //UI imports
 import { RiUserFollowLine, RiLockPasswordLine } from 'react-icons/ri';
 import { AiOutlineMail } from 'react-icons/ai';
-
 import {
   FormWrapper,
   IconWrapper,

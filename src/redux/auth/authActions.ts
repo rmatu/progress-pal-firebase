@@ -12,20 +12,41 @@ export const signUp = (data: SignUpFormTypes) => async (
   const firebase = getFirebase();
   const firestore = getFirestore();
 
-  console.log({ firebase: firebase, firestore: firestore });
   dispatch({ type: actions.SIGN_UP_START });
 
   try {
-    // const res = await firebase
-    //   .auth()
-    //   .createUserWithEmailAndPassword(data.email, data.password);
-    // //Sending the verification email
-    // const user = firebase.auth().currentUser;
-    // await user.sendEmailVerification();
-    // await firestore
+    const res = await firebase
+      .auth()
+      .createUserWithEmailAndPassword(data.email, data.password);
+    //Sending the verification email
+    const user = firebase.auth().currentUser;
+    await user.sendEmailVerification();
+    await firestore
+      .collection('users')
+      .doc(res.user.uid)
+      .set({ nickname: data.nickname });
   } catch (err) {
     dispatch({ type: actions.SIGN_UP_FAIL, payload: err.message });
   }
-
   dispatch({ type: actions.SIGN_UP_END });
 };
+
+export const resendEmail = () => async (
+  dispatch: Dispatch<AppActions>,
+  getState: () => AppState,
+  { getFirebase, getFirestore }: any
+) => {
+  const firebase = getFirebase();
+  dispatch({ type: actions.RESEND_EMAIL_START });
+  const user = firebase.auth().currentUser;
+  await user.sendEmailVerification();
+  try {
+  } catch (err) {
+    dispatch({ type: actions.RESEND_EMAIL_FAIL, payload: err.message });
+  }
+  dispatch({ type: actions.RESEND_EMAIL_SUCCESS });
+};
+
+export const cleanUp = () => ({
+  type: actions.AUTH_CLEAN_UP,
+});

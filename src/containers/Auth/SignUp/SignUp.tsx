@@ -3,6 +3,8 @@ import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { AppState } from '../../../redux/rootReducer';
+import * as authActions from '../../../redux/auth/authActions';
 
 //UI imports
 import { RiUserAddLine, RiLockPasswordLine, RiUserLine } from 'react-icons/ri';
@@ -21,8 +23,6 @@ import Heading from '../../../components/UI/Headings/Heading';
 import Input from '../../../components/UI/Forms/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import { StyledForm } from '../../../hoc/layout/elements';
-import { AppState } from '../../../redux/rootReducer';
-import * as authActions from '../../../redux/auth/authActions';
 
 const SignUpSchema = Yup.object().shape({
   nickname: Yup.string()
@@ -34,7 +34,7 @@ const SignUpSchema = Yup.object().shape({
     .required('The email is required.'),
   password: Yup.string()
     .required('The password is required.')
-    .min(1, 'The password is to short'),
+    .min(8, 'The password is to short'),
   confirmPassword: Yup.string()
     //Getting the reference to the password
     //@ts-ignore
