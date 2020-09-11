@@ -30,7 +30,7 @@ export const TextWrapper = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  margin: 3rem 2rem 4rem 2rem;
+  margin: 3rem 2rem 1.2rem 2rem;
   p {
     color: ${(props) => props.theme.secondaryTextColor};
   }
@@ -82,5 +82,5 @@ export const SpanWrapper = styled.div<{ bold?: any; center?: any }>`
 export const ForgotPasswordWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 0.4rem;
+  margin-top: 0.1rem;
 `;

@@ -20,11 +20,9 @@ import {
 import Heading from '../../../components/UI/Headings/Heading';
 import Input from '../../../components/UI/Forms/Input/Input';
 import Button from '../../../components/UI/Button/Button';
+import { StyledForm } from '../../../hoc/layout/elements';
 import { AppState } from '../../../redux/rootReducer';
 import * as authActions from '../../../redux/auth/authActions';
-import { ThunkDispatch } from 'redux-thunk';
-import { AppActions } from '../../../redux/actions';
-import { bindActionCreators, $CombinedState } from 'redux';
 
 const SignUpSchema = Yup.object().shape({
   nickname: Yup.string()
@@ -70,7 +68,7 @@ const SignUp: React.FC<SignUpProps> = ({ signUp }) => {
         setSubmitting(false);
       }}
     >
-      {({ isSubmitting, isValid, values, errors, isValidating }) => (
+      {({ isSubmitting, isValid }) => (
         <FormWrapper>
           <NavLink exact to="/login">
             <ArrowWrapper>
@@ -87,49 +85,50 @@ const SignUp: React.FC<SignUpProps> = ({ signUp }) => {
               </Heading>
               <p>Please fill the input below</p>
             </TextWrapper>
-            <Field
-              type="text"
-              name="nickname"
-              placeholder="Nickname"
-              component={Input}
-            >
-              <RiUserLine />
-            </Field>
-            <Field
-              type="email"
-              name="email"
-              placeholder="Email"
-              component={Input}
-            >
-              <AiOutlineMail />
-            </Field>
-            <Field
-              type="password"
-              name="password"
-              placeholder="Password"
-              component={Input}
-            >
-              <RiLockPasswordLine />
-            </Field>
-            <Field
-              type="password"
-              name="confirmPassword"
-              placeholder="Confrim Password"
-              component={Input}
-            >
-              <RiLockPasswordLine />
-            </Field>
-            <Button
-              color={'main'}
-              disabled={!isValid || isSubmitting}
-              // onClick={() =>
-              //   console.log({ values, isValid, errors, isValidating })
-              // }
-              // type="submit"
-            >
-              Sign Up
-            </Button>
+
+            <StyledForm>
+              <Field
+                type="text"
+                name="nickname"
+                placeholder="Nickname"
+                component={Input}
+              >
+                <RiUserLine />
+              </Field>
+              <Field
+                type="email"
+                name="email"
+                placeholder="Email"
+                component={Input}
+              >
+                <AiOutlineMail />
+              </Field>
+              <Field
+                type="password"
+                name="password"
+                placeholder="Password"
+                component={Input}
+              >
+                <RiLockPasswordLine />
+              </Field>
+              <Field
+                type="password"
+                name="confirmPassword"
+                placeholder="Confrim Password"
+                component={Input}
+              >
+                <RiLockPasswordLine />
+              </Field>
+              <Button
+                color={'main'}
+                disabled={!isValid || isSubmitting}
+                type="submit"
+              >
+                Sign Up
+              </Button>
+            </StyledForm>
           </ContentWrapper>
+
           <BottomTextWrapper>
             <p>Already have an account? </p>
             <NavLink exact to="/login">

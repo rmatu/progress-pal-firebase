@@ -16,6 +16,7 @@ import {
   SpanWrapper,
   ForgotPasswordWrapper,
 } from './Login.styles';
+import { StyledForm } from '../../../hoc/layout/elements';
 import Heading from '../../../components/UI/Headings/Heading';
 import Input from '../../../components/UI/Forms/Input/Input';
 import Button from '../../../components/UI/Button/Button';
@@ -57,26 +58,33 @@ const Login: React.FC<LoginProps> = () => {
               <p>Please sign in to continue</p>
             </TextWrapper>
 
-            <Field
-              type="email"
-              name="email"
-              placeholder="Email"
-              component={Input}
-            >
-              <AiOutlineMail />
-            </Field>
-            <Field
-              type="text"
-              name="password"
-              placeholder="Password"
-              component={Input}
-            >
-              <RiLockPasswordLine />
-            </Field>
+            <StyledForm>
+              <Field
+                type="email"
+                name="email"
+                placeholder="Email"
+                component={Input}
+              >
+                <AiOutlineMail />
+              </Field>
+              <Field
+                type="password"
+                name="password"
+                placeholder="Password"
+                component={Input}
+              >
+                <RiLockPasswordLine />
+              </Field>
+              <Button
+                color={'main'}
+                disabled={!isValid || isSubmitting}
+                type="submit"
+              >
+                Login
+              </Button>
+            </StyledForm>
           </ContentWrapper>
-          <Button color={'main'} disabled={false}>
-            Login
-          </Button>
+
           <ForgotPasswordWrapper>
             <SpanWrapper center>Forgot Password?</SpanWrapper>
           </ForgotPasswordWrapper>
