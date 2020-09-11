@@ -9,6 +9,7 @@ import VerifyEmail from './containers/Auth/VerifyEmail/VerifyEmail';
 
 const App: React.FC = ({ loggedIn, emailVerified }: any) => {
   let routes;
+
   if (loggedIn && !emailVerified) {
     routes = <VerifyEmail />;
   } else if (loggedIn && emailVerified) {

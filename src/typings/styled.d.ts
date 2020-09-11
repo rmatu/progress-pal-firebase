@@ -10,6 +10,8 @@ declare module 'styled-components' {
     primaryTextColor: string;
     secondaryTextColor: string;
     specialTextColor: string;
+    errorTextColor: string;
+    successTextColor: string;
     shadow: string;
   }
 }

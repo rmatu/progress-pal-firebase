@@ -1,6 +1,5 @@
 const theme = {
   leftSidebarBackground: '#4C5769',
-  //this will be a gradient
   mainContentBackground: '#1d2127',
   rightSidebarBackground: '#191C23',
   modalBackground: '#201A30',
@@ -9,6 +8,7 @@ const theme = {
   specialTextColor: '#0DF5E3',
   inputBackground: '#38304c',
   shadow: 'rgba(0,0,0,.2)',
+  successTextColor: '#617B30',
   errorTextColor: '#ff5757',
 };
 

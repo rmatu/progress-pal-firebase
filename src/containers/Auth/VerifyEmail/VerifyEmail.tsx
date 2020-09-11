@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
   EmailWrapper,
@@ -8,19 +8,23 @@ import {
 } from './VerifyEmail.styles';
 import { HiOutlineMail } from 'react-icons/hi';
 
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../redux/rootReducer';
 import Heading from '../../../components/UI/Headings/Heading';
 import Button from '../../../components/UI/Button/Button';
 import * as authActions from '../../../redux/auth/authActions';
-import { ThunkDispatch } from 'redux-thunk';
-import { AppActions } from '../../../redux/actions';
+import { AuthState } from '../../../redux/auth/authTypes';
 
-interface VerifyEmailProps {
-  resendEmail?: () => void;
-}
+interface VerifyEmailProps {}
 
-const VerifyEmail: React.FC<VerifyEmailProps> = ({ resendEmail }) => {
+const VerifyEmail: React.FC<VerifyEmailProps> = () => {
+  const dispatch = useDispatch();
+  const { loading }: AuthState = useSelector((state: AppState) => state.auth);
+
+  const resendEmail = () => {
+    dispatch(authActions.resendEmail());
+  };
+
   return (
     <EmailWrapper>
       <ContentWrapper>
@@ -32,13 +36,7 @@ const VerifyEmail: React.FC<VerifyEmailProps> = ({ resendEmail }) => {
             Verify your email address
           </Heading>
         </TextWrapper>
-        <Button
-          color={'main'}
-          onClick={() => {
-            //@ts-ignore
-            return resendEmail();
-          }}
-        >
+        <Button color={'main'} onClick={() => resendEmail()}>
           Resend email
         </Button>
       </ContentWrapper>
@@ -46,12 +44,4 @@ const VerifyEmail: React.FC<VerifyEmailProps> = ({ resendEmail }) => {
   );
 };
 
-const mapStateToProps = (state: AppState, ownProps: VerifyEmailProps) => ({});
-
-const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AppActions>) => {
-  return {
-    resendEmail: () => dispatch(authActions.resendEmail()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(VerifyEmail);
+export default VerifyEmail;

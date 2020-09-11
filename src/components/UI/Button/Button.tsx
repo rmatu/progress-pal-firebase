@@ -7,15 +7,16 @@ interface ButtonProps {
   color: string;
   disabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  loading?: string | null;
 }
 
 const Button: React.FC<
   ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>
-> = ({ children, color, disabled, ...rest }) => {
+> = ({ children, color, disabled, loading, ...rest }) => {
   return (
     <Wrapper>
       <StyledButton disabled={disabled} color={color} {...rest}>
-        {children}
+        {loading ? loading : children}
       </StyledButton>
     </Wrapper>
   );

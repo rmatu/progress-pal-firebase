@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../redux/rootReducer';
 import * as authActions from '../../../redux/auth/authActions';
 
@@ -22,7 +22,9 @@ import {
 import Heading from '../../../components/UI/Headings/Heading';
 import Input from '../../../components/UI/Forms/Input/Input';
 import Button from '../../../components/UI/Button/Button';
-import { StyledForm } from '../../../hoc/layout/elements';
+import { StyledForm, MessageWrapper } from '../../../hoc/layout/elements';
+import { AuthState } from '../../../redux/auth/authTypes';
+import Message from '../../../components/UI/Message/Message';
 
 const SignUpSchema = Yup.object().shape({
   nickname: Yup.string()
@@ -34,7 +36,7 @@ const SignUpSchema = Yup.object().shape({
     .required('The email is required.'),
   password: Yup.string()
     .required('The password is required.')
-    .min(8, 'The password is to short'),
+    .min(1, 'The password is to short'),
   confirmPassword: Yup.string()
     //Getting the reference to the password
     //@ts-ignore
@@ -49,10 +51,17 @@ export interface SignUpFormTypes {
   confirmPassword: string;
 }
 
-interface SignUpProps {
-  signUp: (data: SignUpFormTypes) => void;
-}
-const SignUp: React.FC<SignUpProps> = ({ signUp }) => {
+interface SignUpProps {}
+const SignUp: React.FC<SignUpProps> = () => {
+  const dispatch = useDispatch();
+  const signUp = (values: SignUpFormTypes) => {
+    dispatch(authActions.signUp(values));
+  };
+
+  const { error, loading }: AuthState = useSelector(
+    (state: AppState) => state.auth
+  );
+
   return (
     <Formik
       initialValues={{
@@ -121,12 +130,19 @@ const SignUp: React.FC<SignUpProps> = ({ signUp }) => {
               </Field>
               <Button
                 color={'main'}
+                loading={loading ? 'Signing up...' : null}
                 disabled={!isValid || isSubmitting}
                 type="submit"
               >
                 Sign Up
               </Button>
             </StyledForm>
+
+            <MessageWrapper>
+              <Message error={true} show={error}>
+                {error}
+              </Message>
+            </MessageWrapper>
           </ContentWrapper>
 
           <BottomTextWrapper>
@@ -141,10 +157,4 @@ const SignUp: React.FC<SignUpProps> = ({ signUp }) => {
   );
 };
 
-const mapStateToProps = (state: AppState, ownProps: SignUpProps) => ({});
-
-const mapDispatchToProps = {
-  signUp: authActions.signUp,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default SignUp;

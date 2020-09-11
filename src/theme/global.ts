@@ -83,6 +83,8 @@ html{
   --primaryTextColor: ${(props) => props.theme.primaryTextColor}
   --shadow: ${(props) => props.theme.shadow}
   --specialTextColor: ${(props) => props.theme.specialTextColor}
+  --errorTextColor: ${(props) => props.theme.errorTextColor}
+  --successTextcolor: ${(props) => props.theme.successTextColor}
 }
 
 input:focus,

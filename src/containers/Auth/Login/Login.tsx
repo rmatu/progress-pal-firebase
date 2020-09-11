@@ -2,6 +2,8 @@ import React from 'react';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { AuthState } from '../../../redux/auth/authTypes';
 
 //UI imports
 import { RiUserFollowLine, RiLockPasswordLine } from 'react-icons/ri';
@@ -19,6 +21,7 @@ import { StyledForm } from '../../../hoc/layout/elements';
 import Heading from '../../../components/UI/Headings/Heading';
 import Input from '../../../components/UI/Forms/Input/Input';
 import Button from '../../../components/UI/Button/Button';
+import { AppState } from '../../../redux/rootReducer';
 
 interface LoginProps {}
 
@@ -32,6 +35,8 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login: React.FC<LoginProps> = () => {
+  const { loading }: AuthState = useSelector((state: AppState) => state.auth);
+
   return (
     <Formik
       initialValues={{
@@ -76,6 +81,7 @@ const Login: React.FC<LoginProps> = () => {
               </Field>
               <Button
                 color={'main'}
+                loading={loading ? 'Logging in...' : null}
                 disabled={!isValid || isSubmitting}
                 type="submit"
               >
