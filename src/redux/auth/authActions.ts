@@ -24,7 +24,7 @@ export const signUp = (data: SignUpFormTypes) => async (
     await firestore
       .collection('users')
       .doc(res.user.uid)
-      .set({ nickname: data.nickname });
+      .set({ nickname: data.nickname, email: data.email });
   } catch (err) {
     dispatch({ type: actions.SIGN_UP_FAIL, payload: err.message });
   }

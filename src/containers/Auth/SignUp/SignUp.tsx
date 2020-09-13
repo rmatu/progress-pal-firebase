@@ -72,7 +72,6 @@ const SignUp: React.FC<SignUpProps> = () => {
       }}
       validationSchema={SignUpSchema}
       onSubmit={async (values: SignUpFormTypes, { setSubmitting }) => {
-        console.log('im here');
         await signUp(values);
         setSubmitting(false);
       }}

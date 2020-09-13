@@ -8,7 +8,7 @@ const theme = {
   specialTextColor: '#0DF5E3',
   inputBackground: '#38304c',
   shadow: 'rgba(0,0,0,.2)',
-  successTextColor: '#617B30',
+  successTextColor: '#70a514',
   errorTextColor: '#ff5757',
 };
 

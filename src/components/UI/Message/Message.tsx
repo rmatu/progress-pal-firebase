@@ -3,8 +3,8 @@ import { MessageWrapper } from './Message.styles';
 
 interface MessageProps {
   error?: boolean | null;
-  success?: boolean | null;
-  show?: string | null;
+  success?: any;
+  show?: string | boolean | null;
 }
 
 const Message: React.FC<MessageProps> = ({

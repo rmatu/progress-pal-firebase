@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 interface Props {
   error?: boolean | null;
-  success?: boolean | null;
-  show?: string | null;
+  success?: any;
+  show?: string | boolean | null;
 }
 
 export const MessageWrapper = styled.div<Props>`

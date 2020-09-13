@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const EmailWrapper = styled.div`
-  min-width: 30rem;
-  min-height: 30rem;
+  width: 30rem;
+  min-height: 26rem;
   background-color: ${(props) => props.theme.modalBackground};
   border-radius: 1rem;
   -webkit-box-shadow: 10px 3px 19px 0px rgba(0, 0, 0, 0.75);
@@ -16,8 +16,8 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 30rem;
-  margin-bottom: 3rem;
+  min-height: 26rem;
+
   span {
     color: ${(props) => props.theme.specialTextColor};
   }
@@ -37,3 +37,18 @@ export const IconWrapper = styled.div`
 `;
 
 export const TextWrapper = styled.div``;
+
+export const SecondaryTextWrapper = styled.p`
+  margin-top: 0.4rem;
+  width: 20rem;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: ${(props) => props.theme.secondaryTextColor};
+`;
+
+export const MessageWrapper = styled.div`
+  position: absolute;
+  top: 21.5rem;
+  left: auto;
+`;

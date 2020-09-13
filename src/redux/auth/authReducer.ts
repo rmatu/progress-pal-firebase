@@ -43,6 +43,32 @@ export default (state = authDefaultState, action: AuthActionTypes) => {
         ...state,
         error: action.payload,
       };
+    case actions.RESEND_EMAIL_START:
+      return {
+        ...state,
+        verifyEmail: {
+          ...state.verifyEmail,
+          loading: true,
+        },
+      };
+    case actions.RESEND_EMAIL_FAIL:
+      return {
+        ...state,
+        verifyEmail: {
+          ...state.verifyEmail,
+          loading: false,
+          error: action.payload,
+        },
+      };
+    case actions.RESEND_EMAIL_SUCCESS:
+      return {
+        ...state,
+        verifyEmail: {
+          ...state.verifyEmail,
+          loading: false,
+          error: false,
+        },
+      };
 
     default:
       return state;

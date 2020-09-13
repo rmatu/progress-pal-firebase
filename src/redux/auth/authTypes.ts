@@ -41,10 +41,10 @@ export interface SignUpStartAction {
 }
 
 export interface AuthState {
-  error: string | null;
+  error: string | boolean | null;
   loading: boolean;
   verifyEmail: {
-    error: string | null;
+    error: string | boolean | null;
     loading: boolean;
   };
 }
