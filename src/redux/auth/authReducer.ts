@@ -23,22 +23,22 @@ export default (state = authDefaultState, action: AuthActionTypes) => {
           error: null,
         },
       };
-    case actions.SIGN_UP_START:
+    case actions.AUTH_START:
       return {
         ...state,
         loading: true,
       };
-    case actions.SIGN_UP_END:
+    case actions.AUTH_END:
       return {
         ...state,
         loading: false,
       };
-    case actions.SIGN_UP_SUCCESS:
+    case actions.AUTH_SUCCESS:
       return {
         ...state,
         error: false,
       };
-    case actions.SIGN_UP_FAIL:
+    case actions.AUTH_FAIL:
       return {
         ...state,
         error: action.payload,

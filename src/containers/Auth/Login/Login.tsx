@@ -2,8 +2,9 @@ import React from 'react';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AuthState } from '../../../redux/auth/authTypes';
+import * as authActions from '../../../redux/auth/authActions';
 
 //UI imports
 import { RiUserFollowLine, RiLockPasswordLine } from 'react-icons/ri';
@@ -25,6 +26,11 @@ import { AppState } from '../../../redux/rootReducer';
 
 interface LoginProps {}
 
+export interface LoginFormTypes {
+  email: string;
+  password: string;
+}
+
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email.')
@@ -36,6 +42,11 @@ const LoginSchema = Yup.object().shape({
 
 const Login: React.FC<LoginProps> = () => {
   const { loading }: AuthState = useSelector((state: AppState) => state.auth);
+  const dispatch = useDispatch();
+
+  const signIn = (data: LoginFormTypes) => {
+    dispatch(authActions.signIn(data));
+  };
 
   return (
     <Formik
@@ -45,6 +56,7 @@ const Login: React.FC<LoginProps> = () => {
       }}
       validationSchema={LoginSchema}
       onSubmit={async (values, { setSubmitting }) => {
+        await signIn(values);
         setSubmitting(false);
       }}
     >
