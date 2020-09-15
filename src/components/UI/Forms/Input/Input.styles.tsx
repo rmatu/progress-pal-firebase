@@ -5,7 +5,7 @@ export const StyledInput = styled.input`
   border: none;
   width: 85%;
   margin-left: 3rem;
-  color: ${(props) => props.theme.primaryTextColor};
+  color: ${(props) => props.theme.colors.primaryTextColor};
 `;
 
 export const IconWrapper = styled.div`
@@ -22,7 +22,7 @@ export const IconWrapper = styled.div`
 export const Wrapper = styled.div`
   margin-top: 2rem;
   width: 100%;
-  background-color: ${(props) => props.theme.inputBackground};
+  background-color: ${(props) => props.theme.colors.inputBackground};
   border-radius: 2rem;
   padding: 1rem;
   font-weight: 700;

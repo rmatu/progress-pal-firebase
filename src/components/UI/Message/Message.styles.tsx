@@ -13,7 +13,9 @@ export const MessageWrapper = styled.div<Props>`
   color: ${({
     error,
     success,
-    theme: { errorTextColor, successTextColor, primaryTextColor },
+    theme: {
+      colors: { errorTextColor, successTextColor, primaryTextColor },
+    },
   }) => {
     if (error) return errorTextColor;
     if (success) return successTextColor;

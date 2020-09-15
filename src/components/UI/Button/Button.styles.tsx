@@ -16,15 +16,15 @@ export const StyledButton = styled.button<Props>`
   padding: 1.2rem 5rem;
   border-radius: 2rem;
   font-size: 1.2rem;
-  color: ${(props) => props.theme.mainContentBackground};
+  color: ${(props) => props.theme.colors.mainContentBackground};
   font-weight: 700;
-  box-shadow: 0rem 0.5rem 3.5rem ${(props) => props.theme.shadow};
+  box-shadow: 0rem 0.5rem 3.5rem ${(props) => props.theme.colors.shadow};
   border: none;
   cursor: pointer;
 
   background-color: ${(props) => {
     if (props.color === 'main') {
-      return props.theme.specialTextColor;
+      return props.theme.colors.specialTextColor;
     }
   }};
 

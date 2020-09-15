@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export const FormWrapper = styled.div`
-  min-width: 30rem;
+  max-width: 30rem;
+  width: 100%;
   min-height: 50rem;
-  background-color: ${(props) => props.theme.modalBackground};
+  background-color: ${(props) => props.theme.colors.modalBackground};
   border-radius: 1rem;
   -webkit-box-shadow: 10px 3px 19px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 3px 19px 0px rgba(0, 0, 0, 0.75);
@@ -17,7 +18,7 @@ export const IconWrapper = styled.div`
   border-radius: 100%;
   height: 5rem;
   width: 5rem;
-  margin: 3rem auto 1rem auto;
+  margin: 6rem auto 1rem auto;
 
   svg {
     height: 4rem;
@@ -30,9 +31,9 @@ export const TextWrapper = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  margin: 3rem 2rem 1.2rem 2rem;
+  margin: 5rem 2rem 1.2rem 2rem;
   p {
-    color: ${(props) => props.theme.secondaryTextColor};
+    color: ${(props) => props.theme.colors.secondaryTextColor};
   }
 `;
 
@@ -44,7 +45,7 @@ export const BottomTextWrapper = styled.div`
   bottom: 2rem;
   width: 100%;
   p {
-    color: ${(props) => props.theme.secondaryTextColor};
+    color: ${(props) => props.theme.colors.secondaryTextColor};
   }
 `;
 
@@ -54,9 +55,9 @@ export const ArrowWrapper = styled.div`
   left: 3rem;
   cursor: pointer;
   transition: all 0.15s;
-  color: ${(props) => props.theme.secondaryTextColor};
+  color: ${(props) => props.theme.colors.secondaryTextColor};
   &:hover {
-    color: ${(props) => props.theme.specialTextColor};
+    color: ${(props) => props.theme.colors.specialTextColor};
   }
   &:active {
     transform: translateY(2px);
@@ -68,7 +69,7 @@ export const ArrowWrapper = styled.div`
 `;
 
 export const SpanWrapper = styled.div<{ bold?: any; center?: any }>`
-  color: ${(props) => props.theme.specialTextColor};
+  color: ${(props) => props.theme.colors.specialTextColor};
   font-weight: ${(props) => (props.bold ? 700 : 500)};
   margin-left: 0.5rem;
   transition: all 0.15s;

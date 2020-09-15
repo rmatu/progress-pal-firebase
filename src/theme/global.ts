@@ -75,16 +75,30 @@ select {
 }
 
 html{
-  --leftSidebarBackground: ${(props) => props.theme.leftSidebarBackground}
-  --mainContentBackground: ${(props) => props.theme.mainContentBackground}
-  --rightSidebarBackground: ${(props) => props.theme.rightSidebarBackground}
-  --inputBackground: ${(props) => props.theme.inputBackground}
-  --modalBackground: ${(props) => props.theme.modalBackground}
-  --primaryTextColor: ${(props) => props.theme.primaryTextColor}
-  --shadow: ${(props) => props.theme.shadow}
-  --specialTextColor: ${(props) => props.theme.specialTextColor}
-  --errorTextColor: ${(props) => props.theme.errorTextColor}
-  --successTextcolor: ${(props) => props.theme.successTextColor}
+  font-size: 100%;
+  box-sizing: border-box;
+  --leftSidebarBackground: ${(props) =>
+    props.theme.colors.leftSidebarBackground}
+  --mainContentBackground: ${(props) =>
+    props.theme.colors.mainContentBackground}
+  --rightSidebarBackground: ${(props) =>
+    props.theme.colors.rightSidebarBackground}
+  --inputBackground: ${(props) => props.theme.colors.inputBackground}
+  --modalBackground: ${(props) => props.theme.colors.modalBackground}
+  --primaryTextColor: ${(props) => props.theme.colors.primaryTextColor}
+  --shadow: ${(props) => props.theme.colors.shadow}
+  --specialTextColor: ${(props) => props.theme.colors.specialTextColor}
+  --errorTextColor: ${(props) => props.theme.colors.errorTextColor}
+  --successTextcolor: ${(props) => props.theme.colors.successTextColor}
+
+  @media ${(props) => props.theme.mediaQueries.small} {
+      font-size: 80%;
+    }
+
+    @media ${(props) => props.theme.mediaQueries.smallest} {
+      font-size: 80%;
+    }
+
 }
 
 input:focus,

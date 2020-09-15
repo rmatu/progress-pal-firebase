@@ -41,7 +41,7 @@ const SignUpSchema = Yup.object().shape({
     //Getting the reference to the password
     //@ts-ignore
     .oneOf([Yup.ref('password'), null], `Password doesn't match`)
-    .required('You need to confirm your password.'),
+    .required('Confirm your password.'),
 });
 
 export interface SignUpFormTypes {
@@ -135,21 +135,20 @@ const SignUp: React.FC<SignUpProps> = () => {
               >
                 Sign Up
               </Button>
+              <MessageWrapper>
+                <Message error={true} show={error}>
+                  {error}
+                </Message>
+              </MessageWrapper>
+
+              <BottomTextWrapper>
+                <p>Already have an account? </p>
+                <NavLink exact to="/login">
+                  <SpanWrapper>Sign in</SpanWrapper>
+                </NavLink>
+              </BottomTextWrapper>
             </StyledForm>
-
-            <MessageWrapper>
-              <Message error={true} show={error}>
-                {error}
-              </Message>
-            </MessageWrapper>
           </ContentWrapper>
-
-          <BottomTextWrapper>
-            <p>Already have an account? </p>
-            <NavLink exact to="/login">
-              <SpanWrapper>Sign in</SpanWrapper>
-            </NavLink>
-          </BottomTextWrapper>
         </FormWrapper>
       )}
     </Formik>
