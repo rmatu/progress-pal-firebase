@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { NavLink } from 'react-router-dom';
@@ -47,6 +47,12 @@ const Login: React.FC<LoginProps> = () => {
   const signIn = (data: LoginFormTypes) => {
     dispatch(authActions.signIn(data));
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(authActions.cleanUp());
+    };
+  }, []);
 
   return (
     <Formik

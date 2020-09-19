@@ -66,3 +66,16 @@ export const signIn = (data: LoginFormTypes) => async (
     dispatch({ type: actions.AUTH_FAIL, payload: err.message });
   }
 };
+
+export const signOut = () => async (
+  dispatch: Dispatch<AppActions>,
+  getState: () => AppState,
+  { getFirebase }: any
+) => {
+  const firebase = getFirebase();
+  try {
+    await firebase.auth().signOut();
+  } catch (err) {
+    console.log(err.message);
+  }
+};

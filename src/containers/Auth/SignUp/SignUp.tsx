@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { NavLink } from 'react-router-dom';
@@ -57,6 +57,12 @@ const SignUp: React.FC<SignUpProps> = () => {
   const signUp = (values: SignUpFormTypes) => {
     dispatch(authActions.signUp(values));
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(authActions.cleanUp());
+    };
+  }, []);
 
   const { error, loading }: AuthState = useSelector(
     (state: AppState) => state.auth
