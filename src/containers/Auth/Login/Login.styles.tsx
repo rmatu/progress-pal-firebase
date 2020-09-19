@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro';
+import { motion } from 'framer-motion';
 
-export const FormWrapper = styled.div`
+export const FormWrapper = styled(motion.div)`
   max-width: 30rem;
   width: 100%;
   min-height: 50rem;

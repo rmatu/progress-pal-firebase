@@ -1,9 +1,11 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { AnimatePresence } from 'framer-motion';
 
 import SignUp from './containers/Auth/SignUp/SignUp';
 import Login from './containers/Auth/Login/Login';
+import Home from './containers/Home/Home';
 import Layout from './hoc/layout/Layout';
 import VerifyEmail from './containers/Auth/VerifyEmail/VerifyEmail';
 
@@ -13,14 +15,16 @@ const App: React.FC = ({ loggedIn, emailVerified }: any) => {
   if (loggedIn && !emailVerified) {
     routes = <VerifyEmail />;
   } else if (loggedIn && emailVerified) {
-    routes = <p>You are logged in</p>;
+    routes = <Home />;
   } else if (!loggedIn && !emailVerified) {
     routes = (
-      <Switch>
-        <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/login" component={Login} />
-        <Redirect to="/login" />
-      </Switch>
+      <AnimatePresence>
+        <Switch>
+          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/login" component={Login} />
+          <Redirect to="/login" />
+        </Switch>
+      </AnimatePresence>
     );
   }
 
