@@ -1,15 +1,25 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 export const FormWrapper = styled.div`
   max-width: 30rem;
   width: 100%;
-  max-height: 50rem;
+  min-height: 50rem;
   background-color: ${(props) => props.theme.colors.modalBackground};
   border-radius: 1rem;
   -webkit-box-shadow: 10px 3px 19px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 3px 19px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 3px 19px 0px rgba(0, 0, 0, 0.75);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 580px) {
+    max-width: 40rem;
+    height: 100vh;
+    width: 100vw;
+  }
 `;
 
 export const IconWrapper = styled.div`

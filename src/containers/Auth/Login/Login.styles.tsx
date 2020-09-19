@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 export const FormWrapper = styled.div`
   max-width: 30rem;
@@ -10,6 +10,16 @@ export const FormWrapper = styled.div`
   -moz-box-shadow: 10px 3px 19px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 3px 19px 0px rgba(0, 0, 0, 0.75);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 580px) {
+    max-width: 40rem;
+    height: 100vh;
+    width: 100vw;
+  }
 `;
 
 export const IconWrapper = styled.div`
@@ -18,7 +28,7 @@ export const IconWrapper = styled.div`
   border-radius: 100%;
   height: 5rem;
   width: 5rem;
-  margin: 6rem auto 1rem auto;
+  margin: 1rem auto 1rem auto;
 
   svg {
     height: 4rem;
@@ -31,7 +41,7 @@ export const TextWrapper = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  margin: 5rem 2rem 1.2rem 2rem;
+  margin: 1.2rem 2rem 1.2rem 2rem;
   p {
     color: ${(props) => props.theme.colors.secondaryTextColor};
   }

@@ -91,6 +91,11 @@ html{
   --errorTextColor: ${(props) => props.theme.colors.errorTextColor}
   --successTextcolor: ${(props) => props.theme.colors.successTextColor}
 
+
+  @media ${(props) => props.theme.mediaQueries.medium} {
+      font-size: 90%;
+    }
+
   @media ${(props) => props.theme.mediaQueries.small} {
       font-size: 80%;
     }
