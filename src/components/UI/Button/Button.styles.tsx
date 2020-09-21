@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
 `;
 
 export const StyledButton = styled.button<Props>`
+  user-select: none;
   outline: none;
   padding: 1.2rem 5rem;
   border-radius: 2rem;

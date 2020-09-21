@@ -11,6 +11,7 @@ import VerifyEmail from './containers/Auth/VerifyEmail/VerifyEmail';
 
 const App: React.FC = ({ loggedIn, emailVerified }: any) => {
   let routes;
+  const authorized = loggedIn && emailVerified;
 
   if (loggedIn && !emailVerified) {
     routes = <VerifyEmail />;
@@ -28,7 +29,7 @@ const App: React.FC = ({ loggedIn, emailVerified }: any) => {
     );
   }
 
-  return <Layout>{routes}</Layout>;
+  return <Layout authorized={authorized}>{routes}</Layout>;
 };
 
 const mapStateToProps = ({ firebase }: any) => ({

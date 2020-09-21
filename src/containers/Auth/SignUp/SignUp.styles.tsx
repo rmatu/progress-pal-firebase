@@ -16,10 +16,11 @@ export const FormWrapper = styled(motion.div)`
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 580px) {
+  @media (max-width: 660px) {
     max-width: 40rem;
     height: 100vh;
     width: 100vw;
+    border-radius: 0;
   }
 `;
 

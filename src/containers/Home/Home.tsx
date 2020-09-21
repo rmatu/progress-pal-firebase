@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import { Wrapper } from './Home.styles';
+import React, { useEffect, useState } from 'react';
+import { Wrapper, UpperContainer, LowerContainer } from './Home.styles';
 import Header from '../../components/Navigation/Header/Header';
 import { useDispatch } from 'react-redux';
 import * as authActions from '../../redux/auth/authActions';
 
-interface MainsProps {}
+interface HomeProps {}
 
-const Home: React.FC<MainsProps> = ({}) => {
+const Home: React.FC<HomeProps> = ({}) => {
   const dispatch = useDispatch();
 
   const signOut = () => {
@@ -20,10 +20,13 @@ const Home: React.FC<MainsProps> = ({}) => {
   }, []);
 
   return (
-    <Wrapper>
+    <>
       <Header />
-      <button onClick={() => signOut()}>LogOut hehe xd</button>
-    </Wrapper>
+      <Wrapper>
+        <UpperContainer>x</UpperContainer>
+        <LowerContainer>d</LowerContainer>
+      </Wrapper>
+    </>
   );
 };
 

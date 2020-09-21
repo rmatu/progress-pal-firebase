@@ -16,10 +16,11 @@ export const FormWrapper = styled(motion.div)`
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 580px) {
+  @media (max-width: 660px) {
     max-width: 40rem;
     height: 100vh;
     width: 100vw;
+    border-radius: 0;
   }
 `;
 
@@ -42,7 +43,8 @@ export const TextWrapper = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  margin: 1.2rem 2rem 1.2rem 2rem;
+  max-width: 23rem;
+  margin: 1.2rem 0 1.2rem 0;
   p {
     color: ${(props) => props.theme.colors.secondaryTextColor};
   }
