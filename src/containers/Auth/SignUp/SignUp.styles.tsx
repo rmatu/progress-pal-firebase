@@ -44,14 +44,15 @@ export const TextWrapper = styled.div`
 
 export const ContentWrapper = styled.div`
   margin: 0 2rem;
+  width: 25rem;
   p {
     color: ${(props) => props.theme.colors.secondaryTextColor};
   }
 `;
 
 export const BottomTextWrapper = styled.div`
-  margin-top: 4rem;
-  margin-bottom: 1rem;
+  position: absolute;
+  bottom: 2rem;
   display: flex;
   width: 100%;
   justify-content: center;

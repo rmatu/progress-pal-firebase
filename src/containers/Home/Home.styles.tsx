@@ -1,4 +1,7 @@
 import styled from 'styled-components/macro';
+import { motion } from 'framer-motion';
+
+export const HomeWrapper = styled(motion.div)``;
 
 export const Wrapper = styled.div`
   height: calc(100vh - 4.5rem);

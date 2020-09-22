@@ -150,15 +150,14 @@ const SignUp: React.FC<SignUpProps> = () => {
                   {error}
                 </Message>
               </MessageWrapper>
-
-              <BottomTextWrapper>
-                <p>Already have an account? </p>
-                <NavLink exact to="/login">
-                  <SpanWrapper>Sign in</SpanWrapper>
-                </NavLink>
-              </BottomTextWrapper>
             </StyledForm>
           </ContentWrapper>
+          <BottomTextWrapper>
+            <p>Already have an account? </p>
+            <NavLink exact to="/login">
+              <SpanWrapper>Sign in</SpanWrapper>
+            </NavLink>
+          </BottomTextWrapper>
         </FormWrapper>
       )}
     </Formik>

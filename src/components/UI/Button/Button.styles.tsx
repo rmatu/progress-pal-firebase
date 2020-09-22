@@ -8,7 +8,7 @@ interface Props {
 export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: 4rem;
 `;
 
 export const StyledButton = styled.button<Props>`

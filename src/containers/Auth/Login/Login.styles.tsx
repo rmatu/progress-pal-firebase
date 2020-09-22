@@ -43,7 +43,7 @@ export const TextWrapper = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  max-width: 23rem;
+  width: 25rem;
   margin: 1.2rem 0 1.2rem 0;
   p {
     color: ${(props) => props.theme.colors.secondaryTextColor};
