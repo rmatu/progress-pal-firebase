@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import {
-  Wrapper,
-  UpperContainer,
-  LowerContainer,
-  HomeWrapper,
-} from './Home.styles';
-import Header from '../../components/Navigation/Header/Header';
+import React, { useEffect } from 'react';
+import { Wrapper, UpperContainer, LowerContainer } from './Home.styles';
 import { useDispatch } from 'react-redux';
 import * as authActions from '../../redux/auth/authActions';
+import * as navbarActions from '../../redux/navbar/navbarActions';
 
 interface HomeProps {}
 
@@ -17,21 +12,15 @@ const Home: React.FC<HomeProps> = ({}) => {
   useEffect(() => {
     return () => {
       dispatch(authActions.cleanUp());
+      dispatch(navbarActions.cleanUp());
     };
-  }, []);
+  }, [dispatch]);
 
   return (
-    <HomeWrapper
-      initial={{ x: 50, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: -50, opacity: 0 }}
-    >
-      <Header />
-      <Wrapper>
-        <UpperContainer>x</UpperContainer>
-        <LowerContainer>d</LowerContainer>
-      </Wrapper>
-    </HomeWrapper>
+    <Wrapper>
+      <UpperContainer>x</UpperContainer>
+      <LowerContainer>d</LowerContainer>
+    </Wrapper>
   );
 };
 

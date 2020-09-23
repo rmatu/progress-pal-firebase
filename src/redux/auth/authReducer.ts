@@ -41,6 +41,7 @@ export default (state = authDefaultState, action: AuthActionTypes) => {
     case actions.AUTH_FAIL:
       return {
         ...state,
+        loading: false,
         error: action.payload,
       };
     case actions.RESEND_EMAIL_START:

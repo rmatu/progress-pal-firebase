@@ -17,12 +17,14 @@ import {
   BottomTextWrapper,
   SpanWrapper,
   ForgotPasswordWrapper,
+  MessageWrapper,
 } from './Login.styles';
 import { StyledForm } from '../../../hoc/layout/elements';
 import Heading from '../../../components/UI/Headings/Heading';
 import Input from '../../../components/UI/Forms/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import { AppState } from '../../../redux/rootReducer';
+import Message from '../../../components/UI/Message/Message';
 
 interface LoginProps {}
 
@@ -41,7 +43,9 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login: React.FC<LoginProps> = () => {
-  const { loading }: AuthState = useSelector((state: AppState) => state.auth);
+  const { loading, error }: AuthState = useSelector(
+    (state: AppState) => state.auth
+  );
   const dispatch = useDispatch();
 
   const signIn = (data: LoginFormTypes) => {
@@ -110,6 +114,11 @@ const Login: React.FC<LoginProps> = () => {
                 Login
               </Button>
             </StyledForm>
+            <MessageWrapper>
+              <Message error={true} show={error}>
+                {error}
+              </Message>
+            </MessageWrapper>
           </ContentWrapper>
 
           <ForgotPasswordWrapper>

@@ -15,6 +15,7 @@ export const FixedWrapper = styled.div`
 export const LogoText = styled.p`
   font-size: 1.3rem;
   font-weight: bold;
+  z-index: 999;
 `;
 
 export const HamburgerWrapper = styled.div`

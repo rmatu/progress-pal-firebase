@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 export const FormWrapper = styled(motion.div)`
   max-width: 30rem;
   width: 100%;
-  min-height: 50rem;
+  min-height: 60rem;
   background-color: ${(props) => props.theme.colors.modalBackground};
   border-radius: 1rem;
   -webkit-box-shadow: 10px 3px 19px 0px rgba(0, 0, 0, 0.75);
@@ -97,4 +97,10 @@ export const ForgotPasswordWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 0.1rem;
+`;
+
+export const MessageWrapper = styled.div`
+  margin-top: 4rem;
+  position: absolute;
+  width: 85%;
 `;

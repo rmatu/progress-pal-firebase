@@ -5,7 +5,7 @@ interface BurgerProps {
 }
 
 export const StyledBurger = styled.button<BurgerProps>`
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: space-around;
   width: 2rem;
@@ -41,5 +41,9 @@ export const StyledBurger = styled.button<BurgerProps>`
     :nth-child(3) {
       transform: ${({ open }) => (open ? 'rotate(-45deg)' : 'rotate(0)')};
     }
+  }
+
+  @media (max-width: 764px) {
+    display: flex;
   }
 `;

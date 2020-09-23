@@ -75,7 +75,7 @@ select {
 }
 
 html{
-  font-size: 100%;
+  font-size: 80%;
   box-sizing: border-box;
   --leftSidebarBackground: ${(props) =>
     props.theme.colors.leftSidebarBackground}
@@ -90,20 +90,6 @@ html{
   --specialTextColor: ${(props) => props.theme.colors.specialTextColor}
   --errorTextColor: ${(props) => props.theme.colors.errorTextColor}
   --successTextcolor: ${(props) => props.theme.colors.successTextColor}
-
-
-  @media ${(props) => props.theme.mediaQueries.medium} {
-      font-size: 90%;
-    }
-
-  @media ${(props) => props.theme.mediaQueries.small} {
-      font-size: 80%;
-    }
-
-    @media ${(props) => props.theme.mediaQueries.smallest} {
-      font-size: 80%;
-    }
-
 }
 
 input:focus,

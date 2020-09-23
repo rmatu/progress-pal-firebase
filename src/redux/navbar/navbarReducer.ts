@@ -12,6 +12,11 @@ export default (state = navbarDefaultState, action: NavbarActionTypes) => {
         ...state,
         open: !state.open,
       };
+    case actions.CLEAN_UP_NAVBAR:
+      return {
+        ...state,
+        open: false,
+      };
     default:
       return state;
   }
