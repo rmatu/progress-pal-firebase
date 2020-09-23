@@ -5,6 +5,60 @@ export interface UlProps {
   open: boolean;
 }
 
+export const Li = styled(NavLink)`
+  padding: 16px 10px;
+  cursor: pointer;
+  transition: all 0.1s;
+  color: white;
+  font-size: 1.2rem;
+  :not(:last-child) {
+    margin-right: 2rem;
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-bottom: none;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.specialTextColor};
+  }
+
+  svg {
+    margin-right: 0.6rem;
+  }
+
+  @media (max-width: 764px) {
+    border: none !important;
+    margin-right: 0;
+    width: 16rem;
+    padding: 0 2em;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    border-bottom: none;
+
+    :not(:last-child) {
+      margin-right: 0;
+    }
+
+    :last-child {
+      border-top: 1px solid white !important;
+      margin-top: 2rem;
+      margin-right: 1.5rem;
+    }
+
+    :first-child {
+      margin-top: 5rem;
+    }
+
+    svg {
+      height: 100%;
+      display: inline-block;
+      margin-right: 0.4rem;
+    }
+  }
+`;
+
 export const Ul = styled.ul<UlProps>`
   list-style: none;
   display: flex;
@@ -24,37 +78,10 @@ export const Ul = styled.ul<UlProps>`
     width: 100%;
     padding-top: 3.5rem;
     transition: transform 0.3s ease-in-out;
-  }
-`;
 
-export const Li = styled(NavLink)`
-  padding: 16px 10px;
-  cursor: pointer;
-  transition: all 0.1s;
-  color: white;
-  font-size: 1.2rem;
-  margin-right: 2rem;
-
-  border-bottom: none;
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.specialTextColor};
-  }
-
-  @media (max-width: 764px) {
-    border: none !important;
-
-    :last-child {
-      border-top: 1px solid white !important;
-      margin-top: 2rem;
+    ${Li} {
+      transition: opacity 0.5s ease-in-out;
+      opacity: ${({ open }) => (open ? '1' : '0')};
     }
-    :first-child {
-      margin-top: 5rem;
-    }
-    padding: 0 2em;
-    padding-top: 18px;
-    padding-bottom: 18px;
-
-    border-bottom: none;
   }
 `;

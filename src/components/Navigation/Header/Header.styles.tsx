@@ -10,6 +10,9 @@ export const FixedWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  -webkit-box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.75);
 `;
 
 export const LogoText = styled.p`

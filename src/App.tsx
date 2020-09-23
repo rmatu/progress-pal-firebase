@@ -9,7 +9,7 @@ import Login from './containers/Auth/Login/Login';
 import Home from './containers/Home/Home';
 import Layout from './hoc/layout/Layout';
 import VerifyEmail from './containers/Auth/VerifyEmail/VerifyEmail';
-import Exercises from './containers/Exercises/Exercises';
+import BodyParts from './containers/BodyParts/BodyParts';
 import Account from './containers/Account/Account';
 
 const App: React.FC = ({ loggedIn, emailVerified }: any) => {
@@ -23,7 +23,7 @@ const App: React.FC = ({ loggedIn, emailVerified }: any) => {
       <AnimatePresence>
         <Switch>
           <Route exact path={ROUTES.HOME} component={Home} />
-          <Route exact path={ROUTES.EXERCISES} component={Exercises} />
+          <Route exact path={ROUTES.BODY_PARTS} component={BodyParts} />
           <Route exact path={ROUTES.ACCOUNT} component={Account} />
           <Redirect to={ROUTES.HOME} />
         </Switch>

@@ -6,7 +6,7 @@ import * as navbarActions from '../../redux/navbar/navbarActions';
 
 interface HomeProps {}
 
-const Home: React.FC<HomeProps> = ({}) => {
+const Home: React.FC<HomeProps> = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,7 +18,10 @@ const Home: React.FC<HomeProps> = ({}) => {
 
   return (
     <Wrapper>
-      <UpperContainer>x</UpperContainer>
+      <UpperContainer>
+        <div>Here will be the callendar</div>
+        <div>Here will be the circles xd</div>
+      </UpperContainer>
       <LowerContainer>d</LowerContainer>
     </Wrapper>
   );

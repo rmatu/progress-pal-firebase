@@ -10,6 +10,7 @@ export const Wrapper = styled.div`
 export const UpperContainer = styled.div`
   background-color: ${(props) => props.theme.colors.mainContentBackground};
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid red;

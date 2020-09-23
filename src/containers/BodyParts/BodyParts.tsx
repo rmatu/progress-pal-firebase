@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { cleanUp } from '../../redux/navbar/navbarActions';
 
-interface AccountProps {}
+interface BodyPartsProps {}
 
-const Account: React.FC<AccountProps> = () => {
+const BodyParts: React.FC<BodyPartsProps> = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,9 +15,11 @@ const Account: React.FC<AccountProps> = () => {
 
   return (
     <>
-      <div style={{ marginTop: '5rem' }}>This will be the Account Wrapper</div>
+      <div style={{ marginTop: '5rem' }}>
+        This will be the BodyParts Wrapper
+      </div>
     </>
   );
 };
 
-export default Account;
+export default BodyParts;
