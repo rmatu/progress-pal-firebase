@@ -15,6 +15,7 @@ export const UpperContainer = styled.div`
   align-items: center;
   border-bottom: 1px solid red;
   height: 80%;
+  margin-top: 2em;
 `;
 
 export const LowerContainer = styled.div`

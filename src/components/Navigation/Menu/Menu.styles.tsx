@@ -11,14 +11,14 @@ export const Li = styled(NavLink)`
   transition: all 0.1s;
   color: white;
   font-size: 1.2rem;
-  :not(:last-child) {
-    margin-right: 2rem;
-  }
   display: flex;
   justify-content: center;
   align-items: center;
-
   border-bottom: none;
+
+  :not(:last-child) {
+    margin-right: 2rem;
+  }
 
   &:hover {
     color: ${({ theme }) => theme.colors.specialTextColor};
@@ -43,8 +43,7 @@ export const Li = styled(NavLink)`
 
     :last-child {
       border-top: 1px solid white !important;
-      margin-top: 2rem;
-      margin-right: 1.5rem;
+      margin-top: 2em;
     }
 
     :first-child {
@@ -74,10 +73,14 @@ export const Ul = styled.ul<UlProps>`
     transform: ${({ open }) => (open ? 'translateY(0%)' : 'translateY(-100%)')};
     top: 0;
     right: 0;
-    height: 40vh;
+    height: 45vh;
     width: 100%;
     padding-top: 3.5rem;
     transition: transform 0.3s ease-in-out;
+    -webkit-box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: ${({ open }) =>
+      open ? '0px 3px 19px 0px rgba(0, 0, 0, 0.75)' : 'none'};
 
     ${Li} {
       transition: opacity 0.5s ease-in-out;

@@ -14,7 +14,7 @@ import Account from './containers/Account/Account';
 
 const App: React.FC = ({ loggedIn, emailVerified }: any) => {
   let routes;
-  const authorized = loggedIn && emailVerified;
+  const authorized: boolean = loggedIn && emailVerified;
 
   if (loggedIn && !emailVerified) {
     routes = <VerifyEmail />;

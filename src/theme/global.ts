@@ -90,7 +90,11 @@ html{
   --specialTextColor: ${(props) => props.theme.colors.specialTextColor}
   --errorTextColor: ${(props) => props.theme.colors.errorTextColor}
   --successTextcolor: ${(props) => props.theme.colors.successTextColor}
-}
+
+  @media ${(props) => props.theme.mediaQueries.smallest} {
+      font-size: 60%;
+    }
+
 
 input:focus,
 select:focus,

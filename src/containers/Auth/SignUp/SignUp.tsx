@@ -62,7 +62,7 @@ const SignUp: React.FC<SignUpProps> = () => {
     return () => {
       dispatch(authActions.cleanUp());
     };
-  }, []);
+  }, [dispatch]);
 
   const { error, loading }: AuthState = useSelector(
     (state: AppState) => state.auth

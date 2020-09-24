@@ -56,7 +56,7 @@ const Login: React.FC<LoginProps> = () => {
     return () => {
       dispatch(authActions.cleanUp());
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <Formik
