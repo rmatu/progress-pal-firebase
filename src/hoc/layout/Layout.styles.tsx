@@ -16,4 +16,5 @@ export const ContentWrapper = styled.main`
   background-color: ${(props) => props.theme.colors.mainContentBackground};
   color: ${(props) => props.theme.colors.primaryTextColor};
   display: block;
+  overflow: hidden;
 `;
