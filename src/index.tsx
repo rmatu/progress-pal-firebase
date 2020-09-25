@@ -26,6 +26,12 @@ const Wrapper = styled.div`
   background-color: ${(props) => props.theme.colors.mainContentBackground};
 `;
 
+export const NoContent = styled.div`
+  width: 6rem;
+  height: 6rem;
+  margin-bottom: 10rem;
+`;
+
 interface AuthProps {
   children: React.ReactNode[] | React.ReactNode;
 }
@@ -39,7 +45,9 @@ const AuthIsLoaded: React.FC<AuthProps> = ({ children }) => {
       <ThemeProvider theme={theme}>
         <React.Fragment>
           <Wrapper>
-            <Loader isWhite />
+            <NoContent>
+              <Loader isWhite />
+            </NoContent>
           </Wrapper>
           <GlobalStyles />
         </React.Fragment>

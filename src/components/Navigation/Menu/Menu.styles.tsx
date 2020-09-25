@@ -81,7 +81,7 @@ export const Ul = styled.ul<UlProps>`
     -moz-box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.75);
     box-shadow: ${({ open }) =>
       open ? '0px 3px 19px 0px rgba(0, 0, 0, 0.75)' : 'none'};
-
+    z-index: 998;
     ${Li} {
       transition: opacity 0.5s ease-in-out;
       opacity: ${({ open }) => (open ? '1' : '0')};

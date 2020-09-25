@@ -15,7 +15,7 @@ const Account: React.FC<AccountProps> = () => {
 
   return (
     <>
-      <div style={{ marginTop: '5rem' }}>This will be the Account Wrapper</div>
+      <div>This will be the Account Wrapper</div>
     </>
   );
 };

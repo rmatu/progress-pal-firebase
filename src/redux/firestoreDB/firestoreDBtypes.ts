@@ -18,7 +18,6 @@ export interface addBodyPartFailAction {
 export interface FirestoreDBstate {
   error: string | boolean | null;
   loading: boolean;
-  bodyParts: string[];
 }
 
 export type FirestoreDBactionTypes =
