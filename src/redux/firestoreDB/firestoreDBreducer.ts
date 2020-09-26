@@ -12,6 +12,7 @@ export default (state = initialState, action: FirestoreDBactionTypes) => {
       return {
         ...state,
         loading: true,
+        error: false,
       };
     case actions.ADD_BODY_PART_START:
       return {

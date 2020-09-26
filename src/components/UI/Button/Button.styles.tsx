@@ -2,13 +2,22 @@ import styled from 'styled-components/macro';
 
 interface Props {
   color: string;
+  contain?: string;
   disabled?: boolean;
 }
 
-export const Wrapper = styled.div`
+interface WrapperProps {
+  marginTop?: string;
+}
+
+export const Wrapper = styled.div<WrapperProps>`
   display: flex;
   justify-content: center;
   margin-top: 4rem;
+
+  @media (max-width: 660px) {
+    margin-top: ${({ marginTop }) => (marginTop ? marginTop : '4rem')};
+  }
 `;
 
 export const StyledButton = styled.button<Props>`
@@ -19,13 +28,18 @@ export const StyledButton = styled.button<Props>`
   font-size: 1.2rem;
   color: ${(props) => props.theme.colors.mainContentBackground};
   font-weight: 700;
-  box-shadow: 0rem 0.5rem 3.5rem ${(props) => props.theme.colors.shadow};
+  -webkit-box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.75);
   border: none;
   cursor: pointer;
+  width: ${({ contain }) => contain};
 
   background-color: ${(props) => {
     if (props.color === 'main') {
       return props.theme.colors.specialTextColor;
+    } else if (props.color === 'error') {
+      return props.theme.colors.errorTextColor;
     }
   }};
 

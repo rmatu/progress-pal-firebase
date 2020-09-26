@@ -10,8 +10,8 @@ export const WrappedModal = styled.div<WrappedModalProps>`
   left: 50%;
   transform: ${({ opened }) =>
     opened ? 'translate(-50%, -50%)' : 'translate(-50%, -150%)'};
-  z-index: 150;
-  width: 100%;
+  z-index: 1500;
+  width: 90%;
   max-width: 50rem;
   display: flex;
   opacity: ${({ opened }) => (opened ? '1' : '0')};
@@ -24,4 +24,5 @@ export const WrappedModal = styled.div<WrappedModalProps>`
   padding: 4rem 3rem;
   background: #21283e;
   transition: all 0.1s;
+  color: ${({ theme }) => theme.colors.primaryTextColor};
 `;

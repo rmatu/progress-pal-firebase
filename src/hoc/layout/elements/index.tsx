@@ -9,3 +9,7 @@ export const MessageWrapper = styled.div`
   position: absolute;
   width: 85%;
 `;
+
+export const AddBodyPartForm = styled(Form)`
+  width: 90%;
+`;

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 export const AuthWrapper = styled.main`
   width: 100%;
@@ -18,3 +18,5 @@ export const ContentWrapper = styled.main`
   display: block;
   overflow: hidden;
 `;
+
+export const ToCloseNavbar = styled.div``;

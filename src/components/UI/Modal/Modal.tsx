@@ -10,7 +10,7 @@ interface ModalProps {
   children: React.ReactNode | React.ReactNode[];
 }
 
-//This wil lbe rerender only if the props changes
+//This will be rerender only if the props changes
 const Modal = React.memo<ModalProps>(
   ({ opened, children, close }) => {
     return ReactDOM.createPortal(

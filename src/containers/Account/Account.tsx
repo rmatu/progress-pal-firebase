@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { cleanUp } from '../../redux/navbar/navbarActions';
+import { AppState } from '../../redux/rootReducer';
 
 interface AccountProps {}
 

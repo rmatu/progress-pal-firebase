@@ -4,7 +4,7 @@ export const StyledInput = styled.input`
   background-color: transparent;
   border: none;
   width: 85%;
-  margin-left: 3rem;
+  margin-left: 2rem;
   color: ${(props) => props.theme.colors.primaryTextColor};
 `;
 
@@ -19,9 +19,13 @@ export const IconWrapper = styled.div`
   }
 `;
 
-export const Wrapper = styled.div`
+interface WrapperProps {
+  width?: string;
+}
+
+export const Wrapper = styled.div<WrapperProps>`
   margin-top: 2rem;
-  width: 100%;
+  width: ${({ width }) => (width ? width : '100%')};
   background-color: ${(props) => props.theme.colors.inputBackground};
   border-radius: 2rem;
   padding: 1rem;

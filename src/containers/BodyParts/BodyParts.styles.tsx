@@ -1,12 +1,12 @@
 import styled from 'styled-components/macro';
 
 export const BodyPartsWrapper = styled.div`
+  height: calc(100vh - 4.5rem);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   padding: 0 2rem;
-  height: 100%;
 `;
 
 export const NoContent = styled.div`
@@ -31,7 +31,7 @@ export const AddNewBodyPart = styled.div`
   box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.75);
 
   p {
-    padding: 1.5rem 1rem 1.5rem 1rem;
+    padding: 1.5rem 1.5rem 1.5rem 1.5rem;
     font-weight: bolder;
   }
 `;
@@ -48,4 +48,18 @@ export const IconWrapper = styled.div`
       color: ${({ theme }) => theme.colors.specialTextColor};
     }
   }
+`;
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+
+  @media (max-width: 660px) {
+    flex-direction: column;
+  }
+`;
+
+export const FieldWrapper = styled.div`
+  width: 50%;
 `;

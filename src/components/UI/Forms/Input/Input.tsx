@@ -4,7 +4,7 @@ import { StyledInput, IconWrapper, Wrapper, Error } from './Input.styles';
 interface InputProps {
   field: any;
   form: any;
-  svg: any;
+  width?: string;
 }
 
 const Input: React.FC<InputProps> = ({

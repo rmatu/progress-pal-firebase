@@ -90,6 +90,8 @@ html{
   --specialTextColor: ${(props) => props.theme.colors.specialTextColor}
   --errorTextColor: ${(props) => props.theme.colors.errorTextColor}
   --successTextcolor: ${(props) => props.theme.colors.successTextColor}
+  --headerBackground: ${(props) => props.theme.colors.headerBackground}
+
 
   @media ${(props) => props.theme.mediaQueries.smallest} {
       font-size: 60%;
@@ -113,5 +115,7 @@ input:-webkit-autofill,
 
   a {
     text-decoration: none;
+
+  }
 }
 `;

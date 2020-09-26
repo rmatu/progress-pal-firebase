@@ -14,5 +14,5 @@ export const Wrapper = styled.div<WrapperProps>`
   opacity: ${({ opened }) => (opened ? '1' : '0')};
   visibility: ${({ opened }) => (opened ? 'visible' : 'hidden')};
   transition: all 0.1s;
-  z-index: 100;
+  z-index: 1000;
 `;
