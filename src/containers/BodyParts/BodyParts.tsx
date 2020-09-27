@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cleanUp } from '../../redux/navbar/navbarActions';
+import { setBodyName } from '../../redux/appData/appDataActions';
 import { addBodyPart } from '../../redux/firestoreDB/firestoreDBactions';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { AppState } from '../../redux/rootReducer';
@@ -16,16 +17,14 @@ import {
   SearchBodyPart,
   IconWrapper,
   ButtonsWrapper,
+  LowerContainer,
+  UpperContainer,
 } from './BodyParts.styles';
 import Modal from '../../components/UI/Modal/Modal';
 import Heading from '../../components/UI/Headings/Heading';
 import Input from '../../components/UI/Forms/Input/Input';
 import Button from '../../components/UI/Button/Button';
-import {
-  AddBodyPartForm,
-  LowerContainer,
-  UpperContainer,
-} from '../../hoc/layout/elements';
+import { AddBodyPartForm } from '../../hoc/layout/elements';
 
 const BodyPartSchema = Yup.object().shape({
   name: Yup.string().required(`Your input is empty.`).min(1),
@@ -41,6 +40,7 @@ export interface BodyPart {
 const BodyParts: React.FC<BodyPartsProps> = () => {
   const [modalOpened, setModalOpened] = useState<boolean>(false);
   const userId = useSelector((state: AppState) => state.firebase.auth.uid);
+  const { bodyTypeName } = useSelector((state: AppState) => state.appData);
   const dispatch = useDispatch();
   //syncing the data from firestore into redux
   useFirestoreConnect(`bodyParts/${userId}`);
@@ -54,6 +54,12 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
     };
   }, [dispatch]);
 
+  const handleChange = (name: string) => {
+    if (name) {
+      dispatch(setBodyName(name));
+    }
+  };
+
   let content;
 
   if (bodyParts) {
@@ -65,11 +71,7 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
         return textA < textB ? -1 : textA > textB ? 1 : 0;
       })
       .map((item: BodyPart) => (
-        <option
-          key={item.id}
-          value={item.name}
-          onClick={() => console.log('xd')}
-        >
+        <option key={item.id} value={item.name}>
           {item.name}
         </option>
       ));
@@ -78,9 +80,17 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
   return (
     <Wrapper>
       <UpperContainer>
+        <Heading
+          size={'1.5rem'}
+          color={'#fff'}
+          weight={'700'}
+          marginBottom={'1rem'}
+        >
+          {bodyTypeName}
+        </Heading>
         <Split>
           <SearchBodyPart>
-            <select>
+            <select onChange={(e) => handleChange(e.target.value)}>
               <option value="">Please choose an option</option>
               {content}
             </select>
@@ -91,7 +101,9 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
           </IconWrapper>
         </Split>
       </UpperContainer>
-      <LowerContainer>The graph goes skraaaa</LowerContainer>
+      <LowerContainer>
+        <p>The graph goes skraaaa</p>
+      </LowerContainer>
 
       <Modal opened={modalOpened} close={() => setModalOpened(false)}>
         <Formik

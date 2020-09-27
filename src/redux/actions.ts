@@ -1,3 +1,4 @@
+import { AppDataActionTypes } from './appData/appDataTypes';
 import { NavbarActionTypes } from './navbar/navbarTypes';
 import { AuthActionTypes } from './auth/authTypes';
 import { FirestoreDBactionTypes } from './firestoreDB/firestoreDBtypes';
@@ -5,4 +6,5 @@ import { FirestoreDBactionTypes } from './firestoreDB/firestoreDBtypes';
 export type AppActions =
   | FirestoreDBactionTypes
   | AuthActionTypes
-  | NavbarActionTypes;
+  | NavbarActionTypes
+  | AppDataActionTypes;

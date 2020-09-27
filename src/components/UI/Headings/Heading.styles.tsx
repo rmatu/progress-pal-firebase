@@ -5,6 +5,7 @@ interface Props {
   weight: string;
   uppercase: string;
   size: string;
+  marginBottom?: string;
 }
 
 export const StyledHeading = styled.div<Props>`
@@ -13,4 +14,5 @@ export const StyledHeading = styled.div<Props>`
   text-transform: ${(props) => (props.uppercase ? 'uppercase' : 'none')};
   font-size: ${(props) => props.size};
   margin-top: 0;
+  margin-bottom: ${(props) => (props.marginBottom ? props.marginBottom : '0')};
 `;

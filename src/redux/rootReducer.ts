@@ -4,6 +4,7 @@ import { firestoreReducer } from 'redux-firestore';
 import authReducer from './auth/authReducer';
 import navbarReducer from './navbar/navbarReducer';
 import firestoreDbReducer from './firestoreDB/firestoreDBreducer';
+import appDataReducer from './appData/appDataReducer';
 
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   navbar: navbarReducer,
   firestoreDB: firestoreDbReducer,
+  appData: appDataReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

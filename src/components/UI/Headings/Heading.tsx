@@ -8,6 +8,7 @@ interface HeadingProps {
   weight: string;
   size: string;
   uppercase?: string;
+  marginBottom?: string;
 }
 
 const Heading: React.FC<HeadingProps> = ({
@@ -15,6 +16,7 @@ const Heading: React.FC<HeadingProps> = ({
   color,
   weight,
   size,
+  marginBottom,
   uppercase = '',
 }) => {
   return (
@@ -23,6 +25,7 @@ const Heading: React.FC<HeadingProps> = ({
       weight={weight}
       size={size}
       uppercase={uppercase}
+      marginBottom={marginBottom}
     >
       {children}
     </StyledHeading>
