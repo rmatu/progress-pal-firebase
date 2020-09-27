@@ -9,22 +9,23 @@ import * as Yup from 'yup';
 
 import { HiPlusCircle } from 'react-icons/hi';
 import { RiBodyScanFill } from 'react-icons/ri';
-import Loader from '../../components/UI/Loader/Loader';
+
 import {
-  BodyPartsWrapper,
-  NoContent,
+  Wrapper,
+  Split,
   SearchBodyPart,
-  AddNewBodyPart,
   IconWrapper,
   ButtonsWrapper,
 } from './BodyParts.styles';
 import Modal from '../../components/UI/Modal/Modal';
 import Heading from '../../components/UI/Headings/Heading';
 import Input from '../../components/UI/Forms/Input/Input';
-import Message from '../../components/UI/Message/Message';
 import Button from '../../components/UI/Button/Button';
-import { AddBodyPartForm } from '../../hoc/layout/elements';
-import { MessageWrapper } from '../Auth/Login/Login.styles';
+import {
+  AddBodyPartForm,
+  LowerContainer,
+  UpperContainer,
+} from '../../hoc/layout/elements';
 
 const BodyPartSchema = Yup.object().shape({
   name: Yup.string().required(`Your input is empty.`).min(1),
@@ -47,10 +48,6 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
     (state: AppState) => state.firestore.data.bodyParts
   );
 
-  const { error, loading } = useSelector(
-    (state: AppState) => state.firestoreDB
-  );
-
   useEffect(() => {
     return () => {
       dispatch(cleanUp());
@@ -59,25 +56,42 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
 
   let content;
 
-  if (!bodyParts) {
-    content = (
-      <NoContent>
-        <Loader isWhite />
-      </NoContent>
-    );
+  if (bodyParts) {
+    content = bodyParts[userId].bodyParts
+      .slice(0)
+      .sort(function (a: BodyPart, b: BodyPart) {
+        const textA = a.name.toUpperCase();
+        const textB = b.name.toUpperCase();
+        return textA < textB ? -1 : textA > textB ? 1 : 0;
+      })
+      .map((item: BodyPart) => (
+        <option
+          key={item.id}
+          value={item.name}
+          onClick={() => console.log('xd')}
+        >
+          {item.name}
+        </option>
+      ));
   }
 
   return (
-    <>
-      <BodyPartsWrapper>
-        <SearchBodyPart>{content}</SearchBodyPart>
-        <AddNewBodyPart>
-          <p>Add a specific body part or muscle</p>
+    <Wrapper>
+      <UpperContainer>
+        <Split>
+          <SearchBodyPart>
+            <select>
+              <option value="">Please choose an option</option>
+              {content}
+            </select>
+          </SearchBodyPart>
+
           <IconWrapper onClick={() => setModalOpened(true)}>
             <HiPlusCircle />
           </IconWrapper>
-        </AddNewBodyPart>
-      </BodyPartsWrapper>
+        </Split>
+      </UpperContainer>
+      <LowerContainer>The graph goes skraaaa</LowerContainer>
 
       <Modal opened={modalOpened} close={() => setModalOpened(false)}>
         <Formik
@@ -85,15 +99,17 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
             name: '',
           }}
           validationSchema={BodyPartSchema}
-          onSubmit={({ name }, { setSubmitting }) => {
+          onSubmit={({ name }, { setSubmitting, resetForm }) => {
             dispatch(addBodyPart(name));
             setSubmitting(false);
+            resetForm();
+            setModalOpened((modalOpened) => !modalOpened);
           }}
         >
           {({ isSubmitting, isValid, resetForm }) => (
             <>
               <Heading size={'1.5rem'} color={'#fff'} weight={'bold'}>
-                What is the muscle/body part name?
+                Add a specific muscle or body part
               </Heading>
               <AddBodyPartForm>
                 <Field
@@ -105,16 +121,9 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
                   <RiBodyScanFill />
                 </Field>
 
-                <Message success show={error === false}>
-                  {console.log('from bodyparts')}
-                  {console.log({ error, loading })}
-                  Added successfully
-                </Message>
-
                 <ButtonsWrapper>
                   <Button
                     color={'main'}
-                    loading={loading ? 'Adding...' : null}
                     disabled={!isValid || isSubmitting}
                     type="submit"
                     contain={'100%'}
@@ -134,17 +143,12 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
                     Cancel
                   </Button>
                 </ButtonsWrapper>
-                <MessageWrapper>
-                  <Message error={true} show={error}>
-                    {error}
-                  </Message>
-                </MessageWrapper>
               </AddBodyPartForm>
             </>
           )}
         </Formik>
       </Modal>
-    </>
+    </Wrapper>
   );
 };
 

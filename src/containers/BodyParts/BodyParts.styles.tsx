@@ -1,12 +1,10 @@
 import styled from 'styled-components/macro';
 
-export const BodyPartsWrapper = styled.div`
+export const Wrapper = styled.div`
   height: calc(100vh - 4.5rem);
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  padding: 0 2rem;
+  justify-content: center;
 `;
 
 export const NoContent = styled.div`
@@ -22,8 +20,8 @@ export const AddNewBodyPart = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  height: 15rem;
-  width: 15rem;
+  height: 12rem;
+  width: 12rem;
   background-color: ${({ theme }) => theme.colors.headerBackground};
   border-radius: 1rem;
   -webkit-box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.75);
@@ -31,17 +29,19 @@ export const AddNewBodyPart = styled.div`
   box-shadow: 0px 3px 19px 0px rgba(0, 0, 0, 0.75);
 
   p {
-    padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+    padding: 1.5rem 1.5rem 1rem 1.5rem;
     font-weight: bolder;
   }
 `;
 
 export const IconWrapper = styled.div`
   cursor: pointer;
+  height: 19px;
 
   svg {
-    height: 64px;
-    width: 64px;
+    margin-left: 0.5rem;
+    height: 19px;
+    width: 19px;
     transition: all 0.3s;
 
     :hover {
@@ -62,4 +62,11 @@ export const ButtonsWrapper = styled.div`
 
 export const FieldWrapper = styled.div`
   width: 50%;
+`;
+
+export const Split = styled.div`
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
