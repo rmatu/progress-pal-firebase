@@ -25,6 +25,7 @@ import { RiBodyScanFill } from 'react-icons/ri';
 import { ButtonsWrapper } from '../BodyParts/BodyParts.styles';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Forms/Input/Input';
+import { addExercise } from '../../redux/firestoreDB/firestoreDBactions';
 
 const ExerciseSchema = Yup.object().shape({
   name: Yup.string().required(`Your input is empty.`).min(1),
@@ -131,6 +132,8 @@ const Exercises: React.FC<ExercisesProps> = ({}) => {
           }}
           validationSchema={ExerciseSchema}
           onSubmit={({ name }, { setSubmitting, resetForm }) => {
+            dispatch(addExercise(name));
+
             setSubmitting(false);
             resetForm();
             setModalOpened((modalOpened) => !modalOpened);

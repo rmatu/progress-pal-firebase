@@ -26,6 +26,7 @@ import Heading from '../../components/UI/Headings/Heading';
 import Input from '../../components/UI/Forms/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import { AddBodyPartForm } from '../../hoc/layout/elements';
+import { Exercise } from '../Exercises/Exercises';
 
 const BodyPartSchema = Yup.object().shape({
   name: Yup.string().required(`Your input is empty.`).min(1),
@@ -36,6 +37,7 @@ interface BodyPartsProps {}
 export interface BodyPart {
   name: string;
   id: string;
+  exercises: Exercise[];
 }
 
 const BodyParts: React.FC<BodyPartsProps> = () => {

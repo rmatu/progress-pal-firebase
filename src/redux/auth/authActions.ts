@@ -35,7 +35,6 @@ export const signUp = (data: SignUpFormTypes) => async (
       .doc(res.user.uid)
       .set({
         bodyParts: [...populate],
-        exercises: [],
       });
   } catch (err) {
     dispatch({ type: actions.AUTH_FAIL, payload: err.message });
