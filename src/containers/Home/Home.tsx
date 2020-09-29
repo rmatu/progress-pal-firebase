@@ -22,7 +22,7 @@ const Home: React.FC<HomeProps> = () => {
         <div>Here will be the callendar</div>
         <div>Here will be the circles xd</div>
       </UpperContainer>
-      <LowerContainer>d</LowerContainer>
+      <LowerContainer>The graph for all the exercises</LowerContainer>
     </Wrapper>
   );
 };

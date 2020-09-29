@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cleanUp } from '../../redux/navbar/navbarActions';
-import { setBodyName } from '../../redux/appData/appDataActions';
+import { setBodyTypeName } from '../../redux/appData/appDataActions';
 import { addBodyPart } from '../../redux/firestoreDB/firestoreDBactions';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { AppState } from '../../redux/rootReducer';
@@ -61,7 +61,7 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
 
   const handleChange = (name: string) => {
     if (name) {
-      dispatch(setBodyName(name));
+      dispatch(setBodyTypeName(name));
     }
   };
 
@@ -124,7 +124,7 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
         </Split>
       </UpperContainer>
       <LowerContainer>
-        <p>The graph goes skraaaa</p>
+        <p>The graph for all the exercises of a specific body part</p>
       </LowerContainer>
 
       <Modal opened={modalOpened} close={() => setModalOpened(false)}>

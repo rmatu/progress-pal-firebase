@@ -4,7 +4,6 @@ import * as actions from './firestoreDBtypes';
 import { AppState } from '../rootReducer';
 import { v4 as uuidv4 } from 'uuid';
 import { BodyPart } from '../../containers/BodyParts/BodyParts';
-import { Exercise } from '../../containers/Exercises/Exercises';
 
 export const addBodyPart = (bodyPartName: string) => async (
   dispatch: Dispatch<AppActions>,
@@ -63,8 +62,6 @@ export const addExercise = (exerciseName: string) => async (
     const res = await firestore.collection('bodyParts').doc(userId).get();
     const bodyParts = res.data().bodyParts;
 
-    console.log({ bodyParts });
-
     const index = bodyParts.findIndex(
       (bodyPart: BodyPart) => bodyPart.name === selectedBodyPart
     );
@@ -74,7 +71,7 @@ export const addExercise = (exerciseName: string) => async (
       name: exerciseName,
     };
 
-    bodyParts[index].exercises = [newExercise];
+    bodyParts[index].exercises = [...bodyParts[index].exercises, newExercise];
 
     await firestore.collection('bodyParts').doc(userId).update({
       bodyParts: bodyParts,

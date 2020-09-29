@@ -1,7 +1,12 @@
-export const SELECT_BODY_TYPE = 'SELECT_BODY_TYPE';
+export const SELECT_BODY_TYPE_NAME = 'SELECT_BODY_TYPE_NAME';
+export const SELECT_EXERCISE_NAME = 'SELECT_EXERCISE_NAME';
 
-export interface selectBodyTypeAction {
-  type: typeof SELECT_BODY_TYPE;
+export interface selectBodyTypeNameAction {
+  type: typeof SELECT_BODY_TYPE_NAME;
+  payload: string;
+}
+export interface selectExerciseNameAction {
+  type: typeof SELECT_EXERCISE_NAME;
   payload: string;
 }
 
@@ -10,4 +15,6 @@ export interface appDataState {
   exerciseName: string;
 }
 
-export type AppDataActionTypes = selectBodyTypeAction;
+export type AppDataActionTypes =
+  | selectBodyTypeNameAction
+  | selectExerciseNameAction;
