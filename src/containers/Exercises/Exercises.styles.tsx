@@ -51,16 +51,17 @@ export const IconWrapper = styled.div`
   }
 `;
 
-export const LinkIconWrapper = styled(NavLink)`
+export const BackIcon = styled(NavLink)`
   cursor: pointer;
   height: 19px;
+  transform: rotate(180deg);
+  color: #fff;
 
   svg {
     margin-left: 0.5rem;
     height: 19px;
     width: 19px;
     transition: all 0.3s;
-    color: #fff;
 
     :hover {
       color: ${({ theme }) => theme.colors.specialTextColor};

@@ -1,44 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cleanUp } from '../../redux/navbar/navbarActions';
-import { setBodyName } from '../../redux/appData/appDataActions';
-import { addBodyPart } from '../../redux/firestoreDB/firestoreDBactions';
-import { useFirestoreConnect } from 'react-redux-firebase';
 import { AppState } from '../../redux/rootReducer';
-import { Formik, Field } from 'formik';
+import { cleanUp } from '../../redux/navbar/navbarActions';
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { setBodyName } from '../../redux/appData/appDataActions';
 import * as Yup from 'yup';
 import * as ROUTES from '../../constants/routes';
 
+import Heading from '../../components/UI/Headings/Heading';
 import { HiPlusCircle, HiPlay } from 'react-icons/hi';
-import { RiBodyScanFill } from 'react-icons/ri';
 import {
   Wrapper,
+  UpperContainer,
+  LowerContainer,
+  BackIcon,
   Split,
-  LinkIconWrapper,
   SearchBodyPart,
   IconWrapper,
-  ButtonsWrapper,
-  LowerContainer,
-  UpperContainer,
-} from './BodyParts.styles';
+} from './Exercises.styles';
 import Modal from '../../components/UI/Modal/Modal';
-import Heading from '../../components/UI/Headings/Heading';
-import Input from '../../components/UI/Forms/Input/Input';
-import Button from '../../components/UI/Button/Button';
+import { Field, Formik } from 'formik';
 import { AddBodyPartForm } from '../../hoc/layout/elements';
+import { RiBodyScanFill } from 'react-icons/ri';
+import { ButtonsWrapper } from '../BodyParts/BodyParts.styles';
+import Button from '../../components/UI/Button/Button';
+import Input from '../../components/UI/Forms/Input/Input';
 
-const BodyPartSchema = Yup.object().shape({
+const ExerciseSchema = Yup.object().shape({
   name: Yup.string().required(`Your input is empty.`).min(1),
 });
 
-interface BodyPartsProps {}
-
-export interface BodyPart {
+export interface Exercise {
   name: string;
   id: string;
 }
 
-const BodyParts: React.FC<BodyPartsProps> = () => {
+interface ExercisesProps {}
+
+const Exercises: React.FC<ExercisesProps> = ({}) => {
   const [modalOpened, setModalOpened] = useState<boolean>(false);
   const userId = useSelector((state: AppState) => state.firebase.auth.uid);
   const { bodyTypeName, exerciseName } = useSelector(
@@ -46,9 +45,9 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
   );
   const dispatch = useDispatch();
   //syncing the data from firestore into redux
-  useFirestoreConnect(`bodyParts/${userId}`);
-  const bodyParts = useSelector(
-    (state: AppState) => state.firestore.data.bodyParts
+  useFirestoreConnect(`exercises/${userId}`);
+  const exercises = useSelector(
+    (state: AppState) => state.firestore.data.exercises
   );
 
   useEffect(() => {
@@ -65,19 +64,19 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
 
   let content;
 
-  if (bodyParts) {
-    content = bodyParts[userId].bodyParts
-      .slice(0)
-      .sort(function (a: BodyPart, b: BodyPart) {
-        const textA = a.name.toUpperCase();
-        const textB = b.name.toUpperCase();
-        return textA < textB ? -1 : textA > textB ? 1 : 0;
-      })
-      .map((item: BodyPart) => (
-        <option key={item.id} value={item.name}>
-          {item.name}
-        </option>
-      ));
+  if (exercises) {
+    // content = exercises[userId].exercises
+    //   .slice(0)
+    //   .sort(function (a: Exercise, b: Exercise) {
+    //     const textA = a.name.toUpperCase();
+    //     const textB = b.name.toUpperCase();
+    //     return textA < textB ? -1 : textA > textB ? 1 : 0;
+    //   })
+    //   .map((item: Exercise) => (
+    //     <option key={item.id} value={item.name}>
+    //       {item.name}
+    //     </option>
+    //   ));
   } else {
     content = (
       <option key={'loading'} value={'loading'}>
@@ -106,6 +105,9 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
           {exerciseName}
         </Heading>
         <Split>
+          <BackIcon to={ROUTES.BODY_PARTS}>
+            <HiPlay />
+          </BackIcon>
           <SearchBodyPart>
             <select onChange={(e) => handleChange(e.target.value)}>
               <option value="">Please choose an option</option>
@@ -116,9 +118,6 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
           <IconWrapper onClick={() => setModalOpened(true)}>
             <HiPlusCircle />
           </IconWrapper>
-          <LinkIconWrapper to={ROUTES.EXERCISES}>
-            <HiPlay />
-          </LinkIconWrapper>
         </Split>
       </UpperContainer>
       <LowerContainer>
@@ -130,9 +129,8 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
           initialValues={{
             name: '',
           }}
-          validationSchema={BodyPartSchema}
+          validationSchema={ExerciseSchema}
           onSubmit={({ name }, { setSubmitting, resetForm }) => {
-            dispatch(addBodyPart(name));
             setSubmitting(false);
             resetForm();
             setModalOpened((modalOpened) => !modalOpened);
@@ -141,7 +139,7 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
           {({ isSubmitting, isValid, resetForm }) => (
             <>
               <Heading size={'1.5rem'} color={'#fff'} weight={'bold'}>
-                Add a specific muscle or body part
+                Type in the name of the exercise
               </Heading>
               <AddBodyPartForm>
                 <Field
@@ -184,4 +182,4 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
   );
 };
 
-export default BodyParts;
+export default Exercises;

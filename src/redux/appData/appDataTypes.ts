@@ -7,6 +7,7 @@ export interface selectBodyTypeAction {
 
 export interface appDataState {
   bodyTypeName: string;
+  exerciseName: string;
 }
 
 export type AppDataActionTypes = selectBodyTypeAction;

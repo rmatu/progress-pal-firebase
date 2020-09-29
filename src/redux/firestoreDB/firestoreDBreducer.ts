@@ -8,18 +8,18 @@ const initialState: FirestoreDBstate = {
 
 export default (state = initialState, action: FirestoreDBactionTypes) => {
   switch (action.type) {
-    case actions.ADD_BODY_PART_SUCCESS:
+    case actions.ADD_DATA_SUCCESS:
       return {
         ...state,
         loading: true,
         error: false,
       };
-    case actions.ADD_BODY_PART_START:
+    case actions.ADD_DATA_START:
       return {
         ...state,
         loading: false,
       };
-    case actions.ADD_BODY_PART_FAIL:
+    case actions.ADD_DATA_FAIL:
       return {
         ...state,
         error: action.payload,

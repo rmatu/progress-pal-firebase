@@ -73,7 +73,7 @@ export const Ul = styled.ul<UlProps>`
     transform: ${({ open }) => (open ? 'translateY(0%)' : 'translateY(-100%)')};
     top: 0;
     right: 0;
-    height: 45vh;
+    height: 60vh;
     width: 100%;
     padding-top: 3.5rem;
     transition: transform 0.3s ease-in-out;

@@ -32,6 +32,13 @@ const Menu: React.FC<MenuProps> = () => {
       </Li>
       <Li
         onClick={() => dispatch(toggleNavbar())}
+        to={ROUTES.EXERCISES}
+        activeStyle={{ borderBottom: '1px solid white' }}
+      >
+        Exercises
+      </Li>
+      <Li
+        onClick={() => dispatch(toggleNavbar())}
         to={ROUTES.ACCOUNT}
         activeStyle={{ borderBottom: '1px solid white' }}
       >

@@ -1,17 +1,17 @@
-export const ADD_BODY_PART_SUCCESS = 'ADD_BODY_PART_SUCCESS';
-export const ADD_BODY_PART_START = 'ADD_BODY_PART_START';
-export const ADD_BODY_PART_FAIL = 'ADD_BODY_PART_FAIL';
+export const ADD_DATA_SUCCESS = 'ADD_DATA_SUCCESS';
+export const ADD_DATA_START = 'ADD_DATA_START';
+export const ADD_DATA_FAIL = 'ADD_DATA_FAIL';
 
-export interface addBodyPartSuccessAction {
-  type: typeof ADD_BODY_PART_SUCCESS;
+export interface addDataSuccessAction {
+  type: typeof ADD_DATA_SUCCESS;
 }
 
-export interface addBodyPartStartAction {
-  type: typeof ADD_BODY_PART_START;
+export interface addDataStartAction {
+  type: typeof ADD_DATA_START;
 }
 
-export interface addBodyPartFailAction {
-  type: typeof ADD_BODY_PART_FAIL;
+export interface addDataFailAction {
+  type: typeof ADD_DATA_FAIL;
   payload: string;
 }
 
@@ -21,6 +21,6 @@ export interface FirestoreDBstate {
 }
 
 export type FirestoreDBactionTypes =
-  | addBodyPartSuccessAction
-  | addBodyPartFailAction
-  | addBodyPartStartAction;
+  | addDataSuccessAction
+  | addDataFailAction
+  | addDataStartAction;

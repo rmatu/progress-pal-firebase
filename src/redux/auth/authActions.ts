@@ -4,6 +4,7 @@ import { AppState } from '../rootReducer';
 import * as actions from './authTypes';
 import { SignUpFormTypes } from '../../containers/Auth/SignUp/SignUp';
 import { LoginFormTypes } from '../../containers/Auth/Login/Login';
+import { populateBodyParts } from './../../utils/index';
 
 export const signUp = (data: SignUpFormTypes) => async (
   dispatch: Dispatch<AppActions>,
@@ -19,6 +20,7 @@ export const signUp = (data: SignUpFormTypes) => async (
     const res = await firebase
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password);
+
     //Sending the verification email
     const user = firebase.auth().currentUser;
     await user.sendEmailVerification();
@@ -26,6 +28,15 @@ export const signUp = (data: SignUpFormTypes) => async (
       .collection('users')
       .doc(res.user.uid)
       .set({ nickname: data.nickname, email: data.email });
+
+    const populate = populateBodyParts();
+    await firestore
+      .collection('bodyParts')
+      .doc(res.user.uid)
+      .set({
+        bodyParts: [...populate],
+        exercises: [],
+      });
   } catch (err) {
     dispatch({ type: actions.AUTH_FAIL, payload: err.message });
   }

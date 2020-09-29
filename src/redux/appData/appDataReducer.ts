@@ -3,6 +3,7 @@ import * as actions from './appDataTypes';
 
 const initialState: appDataState = {
   bodyTypeName: 'Chest',
+  exerciseName: 'All',
 };
 
 export default (state = initialState, action: AppDataActionTypes) => {
