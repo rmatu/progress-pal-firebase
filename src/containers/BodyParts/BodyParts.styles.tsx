@@ -102,6 +102,7 @@ export const UpperContainer = styled.div`
 export const LowerContainer = styled.div`
   background-color: ${(props) => props.theme.colors.mainContentBackground};
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 120%;

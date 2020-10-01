@@ -27,6 +27,9 @@ import { RiBodyScanFill } from 'react-icons/ri';
 import { ButtonsWrapper } from '../BodyParts/BodyParts.styles';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Forms/Input/Input';
+import BarGraph from '../../components/UI/Graphs/BarGraph/BarGraph';
+import { checkIfAll } from '../../utils';
+import LineGraph from '../../components/UI/Graphs/LineGraph/LineGraph';
 
 const ExerciseSchema = Yup.object().shape({
   name: Yup.string().required(`Your input is empty.`).min(1),
@@ -71,8 +74,6 @@ const Exercises: React.FC<ExercisesProps> = ({}) => {
     const index = bodyParts[userId].bodyParts.findIndex(
       (bodyPart: BodyPart) => bodyPart.name === bodyTypeName
     );
-
-    console.log(bodyParts[userId].bodyParts[index]);
 
     content = bodyParts[userId].bodyParts[index].exercises
       .slice(0)
@@ -133,8 +134,13 @@ const Exercises: React.FC<ExercisesProps> = ({}) => {
         </Split>
       </UpperContainer>
       <LowerContainer>
-        <p>The graph for a specific exercise</p>
+        {checkIfAll(exerciseName) ? (
+          <BarGraph title={`Progress on ${bodyTypeName.toLowerCase()}`} />
+        ) : (
+          <LineGraph title={`Progress on ${exerciseName}`} />
+        )}
       </LowerContainer>
+      <div>The graph for all the exercises of {exerciseName}</div>
 
       <Modal opened={modalOpened} close={() => setModalOpened(false)}>
         <Formik

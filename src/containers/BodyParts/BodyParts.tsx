@@ -27,6 +27,7 @@ import Input from '../../components/UI/Forms/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import { AddBodyPartForm } from '../../hoc/layout/elements';
 import { Exercise } from '../Exercises/Exercises';
+import BarGraph from '../../components/UI/Graphs/BarGraph/BarGraph';
 
 const BodyPartSchema = Yup.object().shape({
   name: Yup.string().required(`Your input is empty.`).min(1),
@@ -124,7 +125,8 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
         </Split>
       </UpperContainer>
       <LowerContainer>
-        <p>The graph for all the exercises of a specific body part</p>
+        <BarGraph title={`Progress on ${bodyTypeName.toLowerCase()}`} />
+        <div>The graph for all the exercises of {bodyTypeName}</div>
       </LowerContainer>
 
       <Modal opened={modalOpened} close={() => setModalOpened(false)}>

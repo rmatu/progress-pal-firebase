@@ -77,6 +77,15 @@ export const addExercise = (exerciseName: string) => async (
       bodyParts: bodyParts,
     });
 
+    await firestore
+      .collection('exercises')
+      .doc(newExercise.id)
+      .set({
+        ...newExercise,
+        date: '',
+        weight: '',
+      });
+
     dispatch({ type: actions.ADD_DATA_SUCCESS });
     return true;
   } catch (err) {

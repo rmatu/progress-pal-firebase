@@ -50,3 +50,5 @@ export const populateBodyParts = () => {
     },
   ];
 };
+
+export const checkIfAll = (name: string) => (name === 'All' ? true : false);
