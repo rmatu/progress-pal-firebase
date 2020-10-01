@@ -13,20 +13,21 @@ const LineGraph: React.FC<LineGraphProps> = ({ title }) => {
   const chart = () => {
     setChartData({
       labels: [
-        'monday',
-        'tuesday',
-        'wednesday',
-        'thursday',
-        'friday',
-        '1',
-        '2',
+        '01/10/2020',
+        '02/10/2020',
+        '03/10/2020',
+        '04/10/2020',
+        '05/10/2020',
+        '06/10/2020',
+        '07/10/2020',
       ],
       datasets: [
         {
-          label: 'level of thiccness',
-          data: [0, 32, 10, 90, 10, 32, 0],
-          backgroundColor: ['rgba(75, 192, 192, 0.6)'],
-          borderWidth: 4,
+          label: 'KG',
+          data: [32, 34, 54, 43, 46, 32, 12],
+          borderWidth: 2,
+          backgroundColor: 'rgba(112, 165, 20, 0.2)',
+          borderColor: 'rgba(112, 165, 20, 1)',
         },
       ],
     });
@@ -53,16 +54,6 @@ const LineGraph: React.FC<LineGraphProps> = ({ title }) => {
                     autoSkip: true,
                     maxTicksLimit: 10,
                     beginAtZero: true,
-                  },
-                  gridLines: {
-                    display: false,
-                  },
-                },
-              ],
-              xAxes: [
-                {
-                  gridLines: {
-                    display: false,
                   },
                 },
               ],

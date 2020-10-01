@@ -42,7 +42,7 @@ export interface Exercise {
 
 interface ExercisesProps {}
 
-const Exercises: React.FC<ExercisesProps> = ({}) => {
+const Exercises: React.FC<ExercisesProps> = () => {
   const [modalOpened, setModalOpened] = useState<boolean>(false);
   const userId = useSelector((state: AppState) => state.firebase.auth.uid);
   const { bodyTypeName, exerciseName } = useSelector(
@@ -96,7 +96,11 @@ const Exercises: React.FC<ExercisesProps> = ({}) => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper
+      initial={{ x: -50, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: 50, opacity: 0 }}
+    >
       <UpperContainer>
         <Heading
           size={'1.5rem'}

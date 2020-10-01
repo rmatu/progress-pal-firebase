@@ -13,13 +13,13 @@ const BarGraph: React.FC<BarGraphProps> = ({ title }) => {
   const chart = () => {
     setChartData({
       labels: [
-        'monday',
-        'tuesday',
-        'wednesday',
-        'thursday',
-        'friday',
-        'saturday',
-        'sunday',
+        '01/10/2020',
+        '02/10/2020',
+        '03/10/2020',
+        '04/10/2020',
+        '05/10/2020',
+        '06/10/2020',
+        '07/10/2020',
       ],
       datasets: [
         {

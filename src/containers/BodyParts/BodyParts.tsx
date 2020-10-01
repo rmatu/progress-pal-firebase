@@ -90,7 +90,11 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper
+      initial={{ x: -50, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: 50, opacity: 0 }}
+    >
       <UpperContainer>
         <Heading
           size={'1.5rem'}

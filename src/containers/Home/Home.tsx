@@ -17,7 +17,9 @@ const Home: React.FC<HomeProps> = () => {
   }, [dispatch]);
 
   return (
-    <Wrapper>
+    <Wrapper  initial={{ x: -50, opacity: 0 }}
+    animate={{ x: 0, opacity: 1 }}
+    exit={{ x: 50, opacity: 0 }}>
       <UpperContainer>
         <div>Here will be the callendar</div>
         <div>Here will be the circles xd</div>

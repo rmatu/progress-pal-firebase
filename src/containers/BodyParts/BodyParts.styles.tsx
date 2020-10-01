@@ -1,11 +1,14 @@
 import styled from 'styled-components/macro';
 import { NavLink } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(motion.div)`
   height: calc(100vh - 4.5rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: auto;
+  width: 95%;
 `;
 
 export const NoContent = styled.div`

@@ -71,7 +71,6 @@ const Login: React.FC<LoginProps> = () => {
       }}
     >
       {({ isSubmitting, isValid }) => (
-        //@ts-ignore
         <FormWrapper
           initial={{ x: -50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
