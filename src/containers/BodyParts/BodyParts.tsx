@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cleanUp } from '../../redux/navbar/navbarActions';
-import {
-  setBodyTypeName,
-  setBodyTypeId,
-} from '../../redux/appData/appDataActions';
 import { addBodyPart } from '../../redux/firestoreDB/firestoreDBactions';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { AppState } from '../../redux/rootReducer';
@@ -13,14 +9,16 @@ import * as Yup from 'yup';
 import * as ROUTES from '../../constants/routes';
 
 import { HiPlusCircle, HiPlay } from 'react-icons/hi';
-import { RiBodyScanFill } from 'react-icons/ri';
+import { RiBodyScanFill, RiArrowDownSLine } from 'react-icons/ri';
 import {
   Wrapper,
   Split,
+  FirstSelected,
   LinkIconWrapper,
   SearchBodyPart,
   IconWrapper,
   ButtonsWrapper,
+  OptionsContainer,
   LowerContainer,
   UpperContainer,
 } from './BodyParts.styles';
@@ -47,12 +45,14 @@ export interface BodyPart {
 
 const BodyParts: React.FC<BodyPartsProps> = () => {
   const [modalOpened, setModalOpened] = useState<boolean>(false);
+  const [isActiveDropdown, setIsActiveDropdown] = useState<boolean>(false);
+  const [isActiveSelected, setIsActiveSelected] = useState<boolean>(false);
   const userId = useSelector((state: AppState) => state.firebase.auth.uid);
   const { bodyTypeName, exerciseName } = useSelector(
     (state: AppState) => state.appData
   );
   const dispatch = useDispatch();
-  //syncing the data from firestore into redux
+
   useFirestoreConnect(`bodyParts/${userId}`);
   const bodyParts = useSelector(
     (state: AppState) => state.firestore.data.bodyParts
@@ -63,12 +63,6 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
       dispatch(cleanUp());
     };
   }, [dispatch]);
-
-  const handleChange = (name: string) => {
-    if (name) {
-      dispatch(setBodyTypeName(name));
-    }
-  };
 
   let content;
 
@@ -81,14 +75,15 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
         return textA < textB ? -1 : textA > textB ? 1 : 0;
       })
       .map((item: BodyPart) => (
-        <BodyPart key={item.id} id={item.id} value={item.name} />
+        <BodyPart
+          key={item.id}
+          id={item.id}
+          value={item.name}
+          close={() => setIsActiveDropdown(!isActiveDropdown)}
+        />
       ));
   } else {
-    content = (
-      <option key={'loading'} value={'loading'}>
-        Loading data...
-      </option>
-    );
+    content = <div>Loading data...</div>;
   }
 
   return (
@@ -115,20 +110,26 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
           {exerciseName}
         </Heading>
         <Split>
-          <SearchBodyPart>
-            <select
-              onChange={(e) => {
-                handleChange(e.target.value);
-              }}
-            >
-              <option value="">Please choose an option</option>
-              {content}
-            </select>
-          </SearchBodyPart>
-
           <IconWrapper onClick={() => setModalOpened(true)}>
             <HiPlusCircle />
           </IconWrapper>
+
+          <SearchBodyPart>
+            <OptionsContainer isActive={isActiveDropdown}>
+              {content}
+            </OptionsContainer>
+            <FirstSelected
+              isActive={isActiveSelected}
+              onClick={() => {
+                setIsActiveDropdown(!isActiveDropdown);
+                setIsActiveSelected(!isActiveSelected);
+              }}
+            >
+              Select Body Category
+              <RiArrowDownSLine />
+            </FirstSelected>
+          </SearchBodyPart>
+
           <LinkIconWrapper to={ROUTES.EXERCISES}>
             <HiPlay />
           </LinkIconWrapper>

@@ -3,14 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../redux/rootReducer';
 import { cleanUp } from '../../redux/navbar/navbarActions';
 import { useFirestoreConnect } from 'react-redux-firebase';
-import {
-  setExerciseName,
-  setExerciseId,
-} from '../../redux/appData/appDataActions';
 import * as Yup from 'yup';
 import * as ROUTES from '../../constants/routes';
 import { addExercise } from '../../redux/firestoreDB/firestoreDBactions';
 import { BodyPart } from '../BodyParts/BodyParts';
+import { setExerciseName } from '../../redux/appData/appDataActions';
 
 import Heading from '../../components/UI/Headings/Heading';
 import { HiPlusCircle, HiPlay } from 'react-icons/hi';
@@ -18,7 +15,9 @@ import {
   Wrapper,
   UpperContainer,
   LowerContainer,
+  FirstSelected,
   BackIcon,
+  OptionsContainer,
   Split,
   SearchBodyPart,
   IconWrapper,
@@ -26,7 +25,7 @@ import {
 import Modal from '../../components/UI/Modal/Modal';
 import { Field, Formik } from 'formik';
 import { AddBodyPartForm } from '../../hoc/layout/elements';
-import { RiBodyScanFill } from 'react-icons/ri';
+import { RiBodyScanFill, RiArrowDownSLine } from 'react-icons/ri';
 import { ButtonsWrapper } from '../BodyParts/BodyParts.styles';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Forms/Input/Input';
@@ -48,13 +47,14 @@ interface ExercisesProps {}
 
 const Exercises: React.FC<ExercisesProps> = () => {
   const [modalOpened, setModalOpened] = useState<boolean>(false);
+  const [isActiveDropdown, setIsActiveDropdown] = useState<boolean>(false);
+  const [isActiveSelected, setIsActiveSelected] = useState<boolean>(false);
   const userId = useSelector((state: AppState) => state.firebase.auth.uid);
   const { bodyTypeName, exerciseName } = useSelector(
     (state: AppState) => state.appData
   );
 
   const dispatch = useDispatch();
-  //syncing the data from firestore into redux
 
   useFirestoreConnect([
     {
@@ -72,19 +72,11 @@ const Exercises: React.FC<ExercisesProps> = () => {
     (state: AppState) => state.firestore.data.bodyParts
   );
 
-  const test = useSelector((state: AppState) => state.firestore.data.test);
-
   useEffect(() => {
     return () => {
       dispatch(cleanUp());
     };
   }, [dispatch]);
-
-  const handleChange = (name: string) => {
-    if (name) {
-      dispatch(setExerciseName(name));
-    }
-  };
 
   let content;
 
@@ -101,7 +93,12 @@ const Exercises: React.FC<ExercisesProps> = () => {
         return textA < textB ? -1 : textA > textB ? 1 : 0;
       })
       .map((item: Exercise) => (
-        <Exercise key={item.id} id={item.id} value={item.name} />
+        <Exercise
+          key={item.id}
+          id={item.id}
+          value={item.name}
+          close={() => setIsActiveDropdown(!isActiveDropdown)}
+        />
       ));
   } else {
     content = (
@@ -141,11 +138,25 @@ const Exercises: React.FC<ExercisesProps> = () => {
           >
             <HiPlay />
           </BackIcon>
+
+          <IconWrapper onClick={() => setModalOpened(true)}>
+            <HiPlusCircle />
+          </IconWrapper>
+
           <SearchBodyPart>
-            <select onChange={(e) => handleChange(e.target.value)}>
-              <option value="">Please choose an option</option>
+            <OptionsContainer isActive={isActiveDropdown}>
               {content}
-            </select>
+            </OptionsContainer>
+            <FirstSelected
+              isActive={isActiveSelected}
+              onClick={() => {
+                setIsActiveDropdown(!isActiveDropdown);
+                setIsActiveSelected(!isActiveSelected);
+              }}
+            >
+              Select Body Category
+              <RiArrowDownSLine />
+            </FirstSelected>
           </SearchBodyPart>
 
           <IconWrapper onClick={() => setModalOpened(true)}>
