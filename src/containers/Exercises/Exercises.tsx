@@ -154,7 +154,7 @@ const Exercises: React.FC<ExercisesProps> = () => {
                 setIsActiveSelected(!isActiveSelected);
               }}
             >
-              Select Body Category
+              Select Exercise
               <RiArrowDownSLine />
             </FirstSelected>
           </SearchBodyPart>
