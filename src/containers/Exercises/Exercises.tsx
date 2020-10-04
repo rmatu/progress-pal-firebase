@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../redux/rootReducer';
 import { cleanUp } from '../../redux/navbar/navbarActions';
 import { useFirestoreConnect } from 'react-redux-firebase';
-import { setExerciseName } from '../../redux/appData/appDataActions';
+import {
+  setExerciseName,
+  setExerciseId,
+} from '../../redux/appData/appDataActions';
 import * as Yup from 'yup';
 import * as ROUTES from '../../constants/routes';
 import { addExercise } from '../../redux/firestoreDB/firestoreDBactions';
@@ -30,6 +33,7 @@ import Input from '../../components/UI/Forms/Input/Input';
 import BarGraph from '../../components/UI/Graphs/BarGraph/BarGraph';
 import { checkIfAll } from '../../utils';
 import LineGraph from '../../components/UI/Graphs/LineGraph/LineGraph';
+import Exercise from './Exercise/Exercise';
 
 const ExerciseSchema = Yup.object().shape({
   name: Yup.string().required(`Your input is empty.`).min(1),
@@ -51,10 +55,24 @@ const Exercises: React.FC<ExercisesProps> = () => {
 
   const dispatch = useDispatch();
   //syncing the data from firestore into redux
-  useFirestoreConnect(`bodyParts/${userId}`);
+
+  useFirestoreConnect([
+    {
+      collection: 'bodyParts',
+      doc: `${userId}`,
+    },
+    {
+      collection: 'test',
+      where: [['id', '==', '1']],
+      storeAs: 'test',
+    },
+  ]);
+
   const bodyParts = useSelector(
     (state: AppState) => state.firestore.data.bodyParts
   );
+
+  const test = useSelector((state: AppState) => state.firestore.data.test);
 
   useEffect(() => {
     return () => {
@@ -83,9 +101,7 @@ const Exercises: React.FC<ExercisesProps> = () => {
         return textA < textB ? -1 : textA > textB ? 1 : 0;
       })
       .map((item: Exercise) => (
-        <option key={item.id} value={item.name}>
-          {item.name}
-        </option>
+        <Exercise key={item.id} id={item.id} value={item.name} />
       ));
   } else {
     content = (

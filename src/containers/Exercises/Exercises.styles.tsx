@@ -7,6 +7,8 @@ export const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: auto;
+  width: 95%;
 `;
 
 export const NoContent = styled.div`

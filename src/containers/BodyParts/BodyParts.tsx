@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cleanUp } from '../../redux/navbar/navbarActions';
-import { setBodyTypeName } from '../../redux/appData/appDataActions';
+import {
+  setBodyTypeName,
+  setBodyTypeId,
+} from '../../redux/appData/appDataActions';
 import { addBodyPart } from '../../redux/firestoreDB/firestoreDBactions';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { AppState } from '../../redux/rootReducer';
@@ -28,6 +31,7 @@ import Button from '../../components/UI/Button/Button';
 import { AddBodyPartForm } from '../../hoc/layout/elements';
 import { Exercise } from '../Exercises/Exercises';
 import BarGraph from '../../components/UI/Graphs/BarGraph/BarGraph';
+import BodyPart from './BodyPart/BodyPart';
 
 const BodyPartSchema = Yup.object().shape({
   name: Yup.string().required(`Your input is empty.`).min(1),
@@ -77,9 +81,7 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
         return textA < textB ? -1 : textA > textB ? 1 : 0;
       })
       .map((item: BodyPart) => (
-        <option key={item.id} value={item.name}>
-          {item.name}
-        </option>
+        <BodyPart key={item.id} id={item.id} value={item.name} />
       ));
   } else {
     content = (
@@ -114,7 +116,11 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
         </Heading>
         <Split>
           <SearchBodyPart>
-            <select onChange={(e) => handleChange(e.target.value)}>
+            <select
+              onChange={(e) => {
+                handleChange(e.target.value);
+              }}
+            >
               <option value="">Please choose an option</option>
               {content}
             </select>

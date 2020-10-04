@@ -82,12 +82,17 @@ export const addExercise = (exerciseName: string) => async (
       .doc(newExercise.id)
       .set({
         ...newExercise,
-        date: '',
-        weight: '',
+        bodyPartId: bodyParts[index].id,
+        bodyPartName: bodyParts[index].name,
+        data: [
+          {
+            date: '',
+            weight: '',
+          },
+        ],
       });
 
     dispatch({ type: actions.ADD_DATA_SUCCESS });
-    return true;
   } catch (err) {
     dispatch({ type: actions.ADD_DATA_FAIL, payload: err.message });
   }
