@@ -4,8 +4,10 @@ import {
   setExerciseId,
   setExerciseName,
 } from '../../../redux/appData/appDataActions';
+import { checkIfAll } from '../../../utils';
 
 import { Option } from './Exercise.styles';
+import { TiDelete, TiPencil } from 'react-icons/ti';
 
 interface ExerciseProps {
   id: string;
@@ -16,15 +18,29 @@ interface ExerciseProps {
 const Exercise: React.FC<ExerciseProps> = ({ id, value, close }) => {
   const dispatch = useDispatch();
 
+  const handleOnClick = () => {
+    if (checkIfAll(value)) {
+      return;
+    } else {
+      dispatch(setExerciseName(value));
+      dispatch(setExerciseId(id));
+    }
+  };
+
   return (
     <Option
       onClick={() => {
         close();
-        dispatch(setExerciseName(value));
-        dispatch(setExerciseId(id));
+        handleOnClick();
       }}
     >
       {value}
+      {checkIfAll(value) ? null : (
+        <>
+          <TiPencil onClick={() => console.log('renaming')} />
+          <TiDelete onClick={() => console.log('Deleting')} />
+        </>
+      )}
     </Option>
   );
 };

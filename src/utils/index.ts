@@ -51,4 +51,10 @@ export const populateBodyParts = () => {
   ];
 };
 
-export const checkIfAll = (name: string) => (name === 'All' ? true : false);
+export const checkIfAll = (name: string) => {
+  if (name === 'All' || name === 'No exercises...') {
+    return true;
+  } else {
+    return false;
+  }
+};

@@ -85,26 +85,40 @@ const Exercises: React.FC<ExercisesProps> = () => {
       (bodyPart: BodyPart) => bodyPart.name === bodyTypeName
     );
 
-    content = bodyParts[userId].bodyParts[index].exercises
-      .slice(0)
-      .sort(function (a: Exercise, b: Exercise) {
-        const textA = a.name.toUpperCase();
-        const textB = b.name.toUpperCase();
-        return textA < textB ? -1 : textA > textB ? 1 : 0;
-      })
-      .map((item: Exercise) => (
+    if (bodyParts[userId].bodyParts[index].exercises.length > 0) {
+      content = bodyParts[userId].bodyParts[index].exercises
+        .slice(0)
+        .sort(function (a: Exercise, b: Exercise) {
+          const textA = a.name.toUpperCase();
+          const textB = b.name.toUpperCase();
+          return textA < textB ? -1 : textA > textB ? 1 : 0;
+        })
+        .map((item: Exercise) => (
+          <Exercise
+            key={item.id}
+            id={item.id}
+            value={item.name}
+            close={() => setIsActiveDropdown(!isActiveDropdown)}
+          />
+        ));
+    } else {
+      content = (
         <Exercise
-          key={item.id}
-          id={item.id}
-          value={item.name}
+          key={'0dksa-dkas--a0ksd'}
+          id={'0dksa-dkas--a0ksd'}
+          value={'No exercises...'}
           close={() => setIsActiveDropdown(!isActiveDropdown)}
         />
-      ));
+      );
+    }
   } else {
     content = (
-      <option key={'loading'} value={'loading'}>
-        Loading data...
-      </option>
+      <Exercise
+        key={'0dksa-dkas--a0ksd'}
+        id={'0dksa-dkas--a0ksd'}
+        value={'No exercises...'}
+        close={() => setIsActiveDropdown(!isActiveDropdown)}
+      />
     );
   }
 
