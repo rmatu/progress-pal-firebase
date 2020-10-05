@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import {
   setExerciseId,
   setExerciseName,
+  openRenameModal,
 } from '../../../redux/appData/appDataActions';
 import { checkIfAll } from '../../../utils';
 
@@ -37,7 +38,12 @@ const Exercise: React.FC<ExerciseProps> = ({ id, value, close }) => {
       {value}
       {checkIfAll(value) ? null : (
         <>
-          <TiPencil onClick={() => console.log('renaming')} />
+          <TiPencil
+            onClick={(e) => {
+              e.stopPropagation();
+              dispatch(openRenameModal(value));
+            }}
+          />
           <TiDelete onClick={() => console.log('Deleting')} />
         </>
       )}

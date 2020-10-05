@@ -2,6 +2,17 @@ export const SELECT_BODY_TYPE_NAME = 'SELECT_BODY_TYPE_NAME';
 export const SELECT_EXERCISE_NAME = 'SELECT_EXERCISE_NAME';
 export const SELECT_BODY_TYPE_ID = 'SELECT_BODY_TYPE_ID';
 export const SELECT_EXERCISE_ID = 'SELECT_EXERCISE_ID';
+export const OPEN_RENAME_MODAL = 'OPEN_RENAME_MODAL';
+export const CLOSE_RENAME_MODAL = 'CLOSE_RENAME_MODAL';
+
+export interface openRenameModalAction {
+  type: typeof OPEN_RENAME_MODAL;
+  payload: string;
+}
+
+export interface closeRenameModalAction {
+  type: typeof CLOSE_RENAME_MODAL;
+}
 
 export interface selectBodyTypeIdAction {
   type: typeof SELECT_BODY_TYPE_ID;
@@ -27,9 +38,13 @@ export interface appDataState {
   exerciseName: string;
   bodyTypeId: string;
   exerciseId: string;
+  targetName: string;
+  renamingModalOpened: boolean;
 }
 
 export type AppDataActionTypes =
+  | openRenameModalAction
+  | closeRenameModalAction
   | selectBodyTypeNameAction
   | selectBodyTypeIdAction
   | selectExerciseIdAction

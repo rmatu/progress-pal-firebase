@@ -10,6 +10,7 @@ export const Option = styled.div`
   }
 
   svg {
+    z-index: 100000;
     position: absolute;
     color: ${({ theme }) => theme.colors.errorTextColor};
     right: 10px;
@@ -19,6 +20,10 @@ export const Option = styled.div`
     :first-child {
       right: 35px;
       color: white;
+    }
+
+    :hover {
+      color: red;
     }
   }
 `;

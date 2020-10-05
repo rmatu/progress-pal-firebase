@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../redux/rootReducer';
 import { cleanUp } from '../../redux/navbar/navbarActions';
+import { closeRenameModal } from '../../redux/appData/appDataActions';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import * as Yup from 'yup';
 import * as ROUTES from '../../constants/routes';
-import { addExercise } from '../../redux/firestoreDB/firestoreDBactions';
+import {
+  addExercise,
+  editExerciseName,
+} from '../../redux/firestoreDB/firestoreDBactions';
 import { BodyPart } from '../BodyParts/BodyParts';
 import { setExerciseName } from '../../redux/appData/appDataActions';
 
@@ -33,6 +37,7 @@ import BarGraph from '../../components/UI/Graphs/BarGraph/BarGraph';
 import { checkIfAll } from '../../utils';
 import LineGraph from '../../components/UI/Graphs/LineGraph/LineGraph';
 import Exercise from './Exercise/Exercise';
+import Loader from '../../components/UI/Loader/Loader';
 
 const ExerciseSchema = Yup.object().shape({
   name: Yup.string().required(`Your input is empty.`).min(1),
@@ -50,7 +55,7 @@ const Exercises: React.FC<ExercisesProps> = () => {
   const [isActiveDropdown, setIsActiveDropdown] = useState<boolean>(false);
   const [isActiveSelected, setIsActiveSelected] = useState<boolean>(false);
   const userId = useSelector((state: AppState) => state.firebase.auth.uid);
-  const { bodyTypeName, exerciseName } = useSelector(
+  const { bodyTypeName, exerciseName, renamingModalOpened } = useSelector(
     (state: AppState) => state.appData
   );
 
@@ -112,14 +117,7 @@ const Exercises: React.FC<ExercisesProps> = () => {
       );
     }
   } else {
-    content = (
-      <Exercise
-        key={'0dksa-dkas--a0ksd'}
-        id={'0dksa-dkas--a0ksd'}
-        value={'No exercises...'}
-        close={() => setIsActiveDropdown(!isActiveDropdown)}
-      />
-    );
+    content = <Loader isWhite />;
   }
 
   return (
@@ -231,6 +229,65 @@ const Exercises: React.FC<ExercisesProps> = () => {
                     marginTop={'1rem'}
                     onClick={() => {
                       setModalOpened((modalOpened) => !modalOpened);
+                      setTimeout(() => resetForm(), 500);
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                </ButtonsWrapper>
+              </AddBodyPartForm>
+            </>
+          )}
+        </Formik>
+      </Modal>
+
+      <Modal
+        opened={renamingModalOpened}
+        close={() => dispatch(closeRenameModal())}
+      >
+        <Formik
+          initialValues={{
+            name: '',
+          }}
+          validationSchema={ExerciseSchema}
+          onSubmit={({ name }, { setSubmitting, resetForm }) => {
+            dispatch(editExerciseName(name));
+            setSubmitting(false);
+            resetForm();
+            dispatch(closeRenameModal());
+          }}
+        >
+          {({ isSubmitting, isValid, resetForm }) => (
+            <>
+              <Heading size={'1.5rem'} color={'#fff'} weight={'bold'}>
+                Change the name
+              </Heading>
+              <AddBodyPartForm>
+                <Field
+                  type="text"
+                  name="name"
+                  placeholder="Pass the name"
+                  component={Input}
+                >
+                  <RiBodyScanFill />
+                </Field>
+
+                <ButtonsWrapper>
+                  <Button
+                    color={'main'}
+                    disabled={!isValid || isSubmitting}
+                    type="submit"
+                    contain={'100%'}
+                  >
+                    Add
+                  </Button>
+                  <Button
+                    color={'error'}
+                    type="button"
+                    contain={'100%'}
+                    marginTop={'1rem'}
+                    onClick={() => {
+                      dispatch(closeRenameModal());
                       setTimeout(() => resetForm(), 500);
                     }}
                   >

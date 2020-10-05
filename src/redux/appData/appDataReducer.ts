@@ -6,6 +6,8 @@ const initialState: appDataState = {
   bodyTypeId: '',
   exerciseId: '',
   exerciseName: 'All',
+  renamingModalOpened: false,
+  targetName: '',
 };
 
 export default (state = initialState, action: AppDataActionTypes) => {
@@ -30,6 +32,19 @@ export default (state = initialState, action: AppDataActionTypes) => {
         ...state,
         exerciseId: action.payload,
       };
+    case actions.OPEN_RENAME_MODAL:
+      return {
+        ...state,
+        renamingModalOpened: true,
+        targetName: action.payload,
+      };
+    case actions.CLOSE_RENAME_MODAL:
+      return {
+        ...state,
+        renamingModalOpened: false,
+        targetName: '',
+      };
+
     default:
       return state;
   }

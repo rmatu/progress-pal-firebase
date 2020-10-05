@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import {
   setBodyTypeName,
   setBodyTypeId,
+  openRenameModal,
 } from '../../../redux/appData/appDataActions';
 import { checkIfAll } from '../../../utils';
 
@@ -35,7 +36,12 @@ const BodyPart: React.FC<BodyPartProps> = ({ id, value, close }) => {
       }}
     >
       {value}
-      <TiPencil onClick={() => console.log('renaming')} />
+      <TiPencil
+        onClick={(e) => {
+          e.stopPropagation();
+          dispatch(openRenameModal(value));
+        }}
+      />
       <TiDelete onClick={() => console.log('Deleting')} />
     </Option>
   );
