@@ -19,6 +19,14 @@ export const Option = styled.div`
     :first-child {
       right: 35px;
       color: white;
+      opacity: 75%;
+      :hover {
+        color: ${({ theme }) => theme.colors.specialTextColor};
+      }
+    }
+
+    :hover {
+      opacity: 100%;
     }
   }
 `;

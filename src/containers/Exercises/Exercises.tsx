@@ -150,11 +150,6 @@ const Exercises: React.FC<ExercisesProps> = () => {
           >
             <HiPlay />
           </BackIcon>
-
-          <IconWrapper onClick={() => setModalOpened(true)}>
-            <HiPlusCircle />
-          </IconWrapper>
-
           <SearchBodyPart>
             <OptionsContainer isActive={isActiveDropdown}>
               {content}

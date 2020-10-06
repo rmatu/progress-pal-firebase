@@ -153,7 +153,7 @@ export const OptionsContainer = styled.div<{ isActive: boolean }>`
   transition: all 0.4s;
   border-radius: 8px;
   overflow-y: ${({ isActive }) => (isActive ? 'scroll' : 'hidden')};
-  max-height: ${({ isActive }) => (isActive ? '240px' : '0')};
+  max-height: ${({ isActive }) => (isActive ? '220px' : '0')};
 
   order: 1;
 

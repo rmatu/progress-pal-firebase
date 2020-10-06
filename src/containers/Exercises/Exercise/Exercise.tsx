@@ -42,6 +42,7 @@ const Exercise: React.FC<ExerciseProps> = ({ id, value, close }) => {
             onClick={(e) => {
               e.stopPropagation();
               dispatch(openRenameModal(value));
+              dispatch(setExerciseId(id));
             }}
           />
           <TiDelete onClick={() => console.log('Deleting')} />

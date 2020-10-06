@@ -5,6 +5,7 @@ import { AppState } from '../rootReducer';
 import { v4 as uuidv4 } from 'uuid';
 import { BodyPart } from '../../containers/BodyParts/BodyParts';
 import { Exercise } from '../../containers/Exercises/Exercises';
+import { string } from 'yup';
 
 export const addBodyPart = (bodyPartName: string) => async (
   dispatch: Dispatch<AppActions>,
@@ -140,6 +141,8 @@ export const editExerciseName = (changedName: string) => async (
   const firestore = getFirestore();
   const userId = getState().firebase.auth.uid;
   const selectedBodyPart = getState().appData.bodyTypeName;
+  const exerciseId = getState().appData.exerciseId;
+  let bodyPartId = getState().appData.bodyTypeId;
 
   //This is the name when you click on the pencil SVG
   const originalName = getState().appData.targetName;
@@ -149,6 +152,14 @@ export const editExerciseName = (changedName: string) => async (
     const res = await firestore.collection('bodyParts').doc(userId).get();
 
     const bodyParts = res.data().bodyParts;
+
+    // Because the default state of bodyPartName in redux is 'Chest', so we need to set the bodyPartId
+    if (!bodyPartId) {
+      const tmpIndex = bodyParts.findIndex(
+        (bodyPart: BodyPart) => bodyPart.name === 'Chest'
+      );
+      bodyPartId = bodyParts[tmpIndex].id;
+    }
 
     const bodyPartIndex = bodyParts.findIndex(
       (bodyPart: BodyPart) => bodyPart.name === selectedBodyPart
@@ -163,6 +174,29 @@ export const editExerciseName = (changedName: string) => async (
     await firestore.collection('bodyParts').doc(userId).update({
       bodyParts: bodyParts,
     });
+
+    let res2: Object = {};
+
+    await firestore
+      .collection('exercises')
+      .where('bodyPartId', '==', bodyPartId)
+      .get()
+      .then((querySnapshot: any) => {
+        querySnapshot.forEach((doc: any) => {
+          res2 = doc.data();
+        });
+      })
+      .catch((error: any) => {
+        console.log('Error getting documents: ', error);
+      });
+
+    await firestore
+      .collection('exercises')
+      .doc(exerciseId)
+      .update({
+        ...res2,
+        name: changedName,
+      });
 
     dispatch({ type: actions.ADD_DATA_SUCCESS });
     return true;

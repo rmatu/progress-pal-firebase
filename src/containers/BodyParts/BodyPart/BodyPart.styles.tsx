@@ -16,14 +16,19 @@ export const Option = styled.div`
     right: 10px;
     height: 19px;
     width: 19px;
+    transition: all 0.2s;
 
     :first-child {
       right: 35px;
       color: white;
+      opacity: 75%;
+      :hover {
+        color: ${({ theme }) => theme.colors.specialTextColor};
+      }
     }
 
     :hover {
-      color: red;
+      opacity: 100%;
     }
   }
 `;
