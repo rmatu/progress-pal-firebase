@@ -199,7 +199,6 @@ export const editExerciseName = (changedName: string) => async (
       });
 
     dispatch({ type: actions.ADD_DATA_SUCCESS });
-    return true;
   } catch (err) {
     dispatch({ type: actions.ADD_DATA_FAIL, payload: err.message });
   }
@@ -255,8 +254,6 @@ export const deleteBodyPart = (
       });
     }
 
-    console.log(newBodyParts);
-
     if (newBodyParts.length === 0) {
       dispatch({
         type: appDataActions.SELECT_BODY_TYPE_NAME,
@@ -269,6 +266,51 @@ export const deleteBodyPart = (
     }
 
     dispatch({ type: actions.ADD_DATA_START });
+  } catch (err) {
+    dispatch({ type: actions.ADD_DATA_FAIL, payload: err });
+  }
+};
+
+export const deleteExercise = (
+  exerciseId: string,
+  exerciseName: string
+) => async (
+  dispatch: Dispatch<AppActions>,
+  getState: () => AppState,
+  { getFirestore }: any
+) => {
+  const firestore = getFirestore();
+  const userId = getState().firebase.auth.uid;
+  const bodyTypeId = getState().appData.bodyTypeId;
+
+  dispatch({ type: actions.ADD_DATA_START });
+  try {
+    await firestore.collection('exercises').doc(exerciseId).delete();
+
+    // Deleting the exercise form the firestore map
+    const res = await firestore.collection('bodyParts').doc(userId).get();
+    const bodyParts = res.data().bodyParts;
+
+    const bodyPartIndex = bodyParts.findIndex(
+      (bodyPart: BodyPart) => bodyPart.id === bodyTypeId
+    );
+
+    const newExercises = bodyParts[bodyPartIndex].exercises.filter(
+      (exercise: any) => exercise.id !== exerciseId
+    );
+
+    console.log(bodyParts, 'before');
+    console.log(bodyParts[bodyPartIndex].exercises, 'before');
+    bodyParts[bodyPartIndex].exercises = newExercises;
+    console.log(bodyParts[bodyPartIndex].exercises, 'after');
+    console.log(bodyParts, 'after');
+
+    await firestore.collection('bodyParts').doc(userId).update({
+      bodyParts: bodyParts,
+    });
+    dispatch({
+      type: actions.ADD_DATA_SUCCESS,
+    });
   } catch (err) {
     dispatch({ type: actions.ADD_DATA_FAIL, payload: err });
   }

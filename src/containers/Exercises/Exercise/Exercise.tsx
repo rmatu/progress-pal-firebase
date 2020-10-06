@@ -9,6 +9,7 @@ import { checkIfAll } from '../../../utils';
 
 import { Option } from './Exercise.styles';
 import { TiDelete, TiPencil } from 'react-icons/ti';
+import { deleteExercise } from '../../../redux/firestoreDB/firestoreDBactions';
 
 interface ExerciseProps {
   id: string;
@@ -45,7 +46,12 @@ const Exercise: React.FC<ExerciseProps> = ({ id, value, close }) => {
               dispatch(setExerciseId(id));
             }}
           />
-          <TiDelete onClick={() => console.log('Deleting')} />
+          <TiDelete
+            onClick={(e) => {
+              e.stopPropagation();
+              dispatch(deleteExercise(id, value));
+            }}
+          />
         </>
       )}
     </Option>
