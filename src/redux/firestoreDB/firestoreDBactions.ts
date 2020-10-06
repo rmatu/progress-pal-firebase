@@ -5,7 +5,7 @@ import { AppState } from '../rootReducer';
 import { v4 as uuidv4 } from 'uuid';
 import { BodyPart } from '../../containers/BodyParts/BodyParts';
 import { Exercise } from '../../containers/Exercises/Exercises';
-import { string } from 'yup';
+import * as appDataActions from '../appData/appDataTypes';
 
 export const addBodyPart = (bodyPartName: string) => async (
   dispatch: Dispatch<AppActions>,
@@ -202,5 +202,74 @@ export const editExerciseName = (changedName: string) => async (
     return true;
   } catch (err) {
     dispatch({ type: actions.ADD_DATA_FAIL, payload: err.message });
+  }
+};
+
+export const deleteBodyPart = (
+  bodyPartId: string,
+  bodyPartName: string
+) => async (
+  dispatch: Dispatch<AppActions>,
+  getState: () => AppState,
+  { getFirestore }: any
+) => {
+  const firestore = getFirestore();
+  const userId = getState().firebase.auth.uid;
+  const originalBodyTypeName = getState().appData.bodyTypeName;
+
+  dispatch({ type: actions.ADD_DATA_START });
+  try {
+    dispatch({ type: actions.ADD_DATA_SUCCESS });
+
+    // If we are deleting a body part, we also have to delete all the exercises
+    await firestore
+      .collection('exercises')
+      .where('bodyPartId', '==', bodyPartId)
+      .get()
+      .then(function (querySnapshot: any) {
+        var batch = firestore.batch();
+
+        querySnapshot.forEach(function (doc: any) {
+          batch.delete(doc.ref);
+        });
+
+        return batch.commit();
+      });
+
+    // Deleting the body part form the firestore map
+    const res = await firestore.collection('bodyParts').doc(userId).get();
+    const prevBodyParts = res.data().bodyParts;
+    const newBodyParts = prevBodyParts.filter(
+      (bodyPart: any) => bodyPart.id !== bodyPartId
+    );
+
+    await firestore.collection('bodyParts').doc(userId).update({
+      bodyParts: newBodyParts,
+    });
+
+    // If user deletes the body part which was previously set, we have to change the selected body
+    if (bodyPartName === originalBodyTypeName) {
+      dispatch({
+        type: appDataActions.SELECT_BODY_TYPE_NAME,
+        payload: prevBodyParts[0].name,
+      });
+    }
+
+    console.log(newBodyParts);
+
+    if (newBodyParts.length === 0) {
+      dispatch({
+        type: appDataActions.SELECT_BODY_TYPE_NAME,
+        payload: `Empty`,
+      });
+      dispatch({
+        type: appDataActions.SELECT_EXERCISE_NAME,
+        payload: ``,
+      });
+    }
+
+    dispatch({ type: actions.ADD_DATA_START });
+  } catch (err) {
+    dispatch({ type: actions.ADD_DATA_FAIL, payload: err });
   }
 };

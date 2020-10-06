@@ -5,6 +5,7 @@ import {
   setBodyTypeId,
   openRenameModal,
 } from '../../../redux/appData/appDataActions';
+import { deleteBodyPart } from '../../../redux/firestoreDB/firestoreDBactions';
 import { checkIfAll } from '../../../utils';
 
 import { Option } from './BodyPart.styles';
@@ -42,7 +43,12 @@ const BodyPart: React.FC<BodyPartProps> = ({ id, value, close }) => {
           dispatch(openRenameModal(value));
         }}
       />
-      <TiDelete onClick={() => console.log('Deleting')} />
+      <TiDelete
+        onClick={(e) => {
+          e.stopPropagation();
+          dispatch(deleteBodyPart(id, value));
+        }}
+      />
     </Option>
   );
 };
