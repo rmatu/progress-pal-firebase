@@ -299,11 +299,7 @@ export const deleteExercise = (
       (exercise: any) => exercise.id !== exerciseId
     );
 
-    console.log(bodyParts, 'before');
-    console.log(bodyParts[bodyPartIndex].exercises, 'before');
     bodyParts[bodyPartIndex].exercises = newExercises;
-    console.log(bodyParts[bodyPartIndex].exercises, 'after');
-    console.log(bodyParts, 'after');
 
     await firestore.collection('bodyParts').doc(userId).update({
       bodyParts: bodyParts,

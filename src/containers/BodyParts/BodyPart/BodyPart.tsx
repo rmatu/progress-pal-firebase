@@ -46,6 +46,7 @@ const BodyPart: React.FC<BodyPartProps> = ({ id, value, close }) => {
       <TiDelete
         onClick={(e) => {
           e.stopPropagation();
+          dispatch(openRenameModal(value));
           dispatch(deleteBodyPart(id, value));
         }}
       />
