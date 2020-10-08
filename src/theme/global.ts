@@ -34,10 +34,11 @@ dd {
 
 /* Set core body defaults */
 body {
-  min-height: 100vh;
+  height: 100vh;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
+  overflow: hidden;
 
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
@@ -75,6 +76,7 @@ select {
 }
 
 html{
+  height: -webkit-fill-available;
   font-size: 80%;
   box-sizing: border-box;
   --leftSidebarBackground: ${(props) =>

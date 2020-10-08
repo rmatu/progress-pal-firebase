@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { cleanUp } from '../../redux/navbar/navbarActions';
-import {} from '../../redux/rootReducer';
+import { Wrapper } from './Account.styles';
 
 interface AccountProps {}
 
@@ -15,9 +15,9 @@ const Account: React.FC<AccountProps> = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <Wrapper>
       <div>This will be the Account Wrapper</div>
-    </>
+    </Wrapper>
   );
 };
 
