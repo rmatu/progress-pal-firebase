@@ -8,6 +8,10 @@ export const AuthWrapper = styled.main`
   justify-content: center;
   background-color: ${(props) => props.theme.colors.mainContentBackground};
   color: ${(props) => props.theme.colors.primaryTextColor};
+
+  @media (max-width: 660px){
+    width: 100vw;
+  }
 `;
 
 export const ContentWrapper = styled.main`

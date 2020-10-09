@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../redux/rootReducer';
 import * as authActions from '../../../redux/auth/authActions';
+import * as ROUTES from '../../../constants/routes'
 
 //UI imports
 import { RiUserAddLine, RiLockPasswordLine, RiUserLine } from 'react-icons/ri';
@@ -88,7 +89,7 @@ const SignUp: React.FC<SignUpProps> = () => {
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: -50, opacity: 0 }}
         >
-          <NavLink exact to="/login">
+          <NavLink exact to={ROUTES.LOGIN}>
             <ArrowWrapper>
               <BsArrowLeft />
             </ArrowWrapper>
@@ -154,7 +155,7 @@ const SignUp: React.FC<SignUpProps> = () => {
           </ContentWrapper>
           <BottomTextWrapper>
             <p>Already have an account? </p>
-            <NavLink exact to="/login">
+            <NavLink exact to={ROUTES.LOGIN}>
               <SpanWrapper>Sign in</SpanWrapper>
             </NavLink>
           </BottomTextWrapper>

@@ -89,3 +89,23 @@ export const signOut = () => async (
     console.log(err.message);
   }
 };
+
+export const forgotPassword = (email: string) => async (
+  dispatch: Dispatch<AppActions>,
+  getState: () => AppState,
+  { getFirebase }: any
+) => {
+  const firebase = getFirebase();
+  const user = firebase.auth();
+
+  dispatch({ type: actions.RESEND_EMAIL_START });
+  try {
+    console.log('here');
+    const res = await user.sendPasswordResetEmail(email);
+    console.log({ res });
+
+    dispatch({ type: actions.RESEND_EMAIL_SUCCESS });
+  } catch (err) {
+    dispatch({ type: actions.RESEND_EMAIL_FAIL, payload: err.message });
+  }
+};

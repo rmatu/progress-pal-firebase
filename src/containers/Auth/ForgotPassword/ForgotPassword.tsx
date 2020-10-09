@@ -3,23 +3,19 @@ import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { AuthState } from '../../../redux/auth/authTypes';
 import * as authActions from '../../../redux/auth/authActions';
-import * as ROUTES from '../../../constants/routes'
+import * as ROUTES from '../../../constants/routes';
 
 //UI imports
-import { RiUserFollowLine, RiLockPasswordLine } from 'react-icons/ri';
+import { BsArrowLeft } from 'react-icons/bs';
 import { AiOutlineMail } from 'react-icons/ai';
 import {
   FormWrapper,
-  IconWrapper,
   ContentWrapper,
   TextWrapper,
-  BottomTextWrapper,
-  SpanWrapper,
-  ForgotPasswordWrapper,
+  ArrowWrapper,
   MessageWrapper,
-} from './Login.styles';
+} from './ForgotPassword.styles';
 import { StyledForm } from '../../../hoc/layout/elements';
 import Heading from '../../../components/UI/Headings/Heading';
 import Input from '../../../components/UI/Forms/Input/Input';
@@ -27,31 +23,23 @@ import Button from '../../../components/UI/Button/Button';
 import { AppState } from '../../../redux/rootReducer';
 import Message from '../../../components/UI/Message/Message';
 
-interface LoginProps {}
+interface ForgotPasswordSchema {}
 
-export interface LoginFormTypes {
-  email: string;
+export interface ForgotPasswordTypes {
   password: string;
 }
 
-const LoginSchema = Yup.object().shape({
+const ForgotPasswordSchema = Yup.object().shape({
   email: Yup.string()
     .email('Invalid email.')
     .required('The email is required.'),
-  password: Yup.string()
-    .required('The password is required.')
-    .min(8, 'The password is to short'),
 });
 
-const Login: React.FC<LoginProps> = () => {
-  const { loading, error }: AuthState = useSelector(
-    (state: AppState) => state.auth
+const ForgotPassword: React.FC<ForgotPasswordSchema> = () => {
+  const { loading, error } = useSelector(
+    (state: AppState) => state.auth.verifyEmail
   );
   const dispatch = useDispatch();
-
-  const signIn = (data: LoginFormTypes) => {
-    dispatch(authActions.signIn(data));
-  };
 
   useEffect(() => {
     return () => {
@@ -63,11 +51,10 @@ const Login: React.FC<LoginProps> = () => {
     <Formik
       initialValues={{
         email: '',
-        password: '',
       }}
-      validationSchema={LoginSchema}
-      onSubmit={async (values, { setSubmitting }) => {
-        await signIn(values);
+      validationSchema={ForgotPasswordSchema}
+      onSubmit={async ({ email }, { setSubmitting }) => {
+        await dispatch(authActions.forgotPassword(email));
         setSubmitting(false);
       }}
     >
@@ -77,15 +64,21 @@ const Login: React.FC<LoginProps> = () => {
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: 50, opacity: 0 }}
         >
-          <IconWrapper>
-            <RiUserFollowLine />
-          </IconWrapper>
+          <NavLink exact to={ROUTES.LOGIN}>
+            <ArrowWrapper>
+              <BsArrowLeft />
+            </ArrowWrapper>
+          </NavLink>
+
           <ContentWrapper>
             <TextWrapper>
-              <Heading color={'white'} weight={'700'} size={'2rem'}>
-                Login
+              <Heading color={'white'} weight={'700'} size={'1.8rem'}>
+                Forgot your password?
               </Heading>
-              <p>Please sign in to continue</p>
+              <p>
+                Don't worry! just fill in your email and we'll send you a link
+                to reset your password
+              </p>
             </TextWrapper>
 
             <StyledForm>
@@ -97,46 +90,31 @@ const Login: React.FC<LoginProps> = () => {
               >
                 <AiOutlineMail />
               </Field>
-              <Field
-                type="password"
-                name="password"
-                placeholder="Password"
-                component={Input}
-              >
-                <RiLockPasswordLine />
-              </Field>
+
               <Button
                 color={'main'}
-                loading={loading ? 'Logging in...' : null}
+                loading={loading ? 'Sending e-mail' : null}
                 disabled={!isValid || isSubmitting}
                 type="submit"
               >
-                Login
+                Submit
               </Button>
             </StyledForm>
             <MessageWrapper>
-              <Message error={true} show={error}>
+              <Message success show={error === false}>
+                Reset email has been sent
+              </Message>
+            </MessageWrapper>
+            <MessageWrapper>
+              <Message error show={error !== null}>
                 {error}
               </Message>
             </MessageWrapper>
           </ContentWrapper>
-
-          <ForgotPasswordWrapper>
-            <NavLink exact to={ROUTES.FORGOT_PASSWORD}>
-             <SpanWrapper center>Forgot Password?</SpanWrapper>
-            </NavLink>
-          </ForgotPasswordWrapper>
-
-          <BottomTextWrapper>
-            <p>Don't have an account? </p>
-            <NavLink exact to="/signup">
-              <SpanWrapper bold>Sign up</SpanWrapper>
-            </NavLink>
-          </BottomTextWrapper>
         </FormWrapper>
       )}
     </Formik>
   );
 };
 
-export default Login;
+export default ForgotPassword;
