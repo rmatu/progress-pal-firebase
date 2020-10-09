@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { cleanUp } from '../../redux/navbar/navbarActions';
+import { deleteUser } from '../../redux/auth/authActions';
 import { Wrapper } from './Account.styles';
 
 interface AccountProps {}
@@ -17,6 +18,7 @@ const Account: React.FC<AccountProps> = () => {
   return (
     <Wrapper>
       <div>This will be the Account Wrapper</div>
+      <button onClick={() => dispatch(deleteUser())}>Delete User</button>
     </Wrapper>
   );
 };

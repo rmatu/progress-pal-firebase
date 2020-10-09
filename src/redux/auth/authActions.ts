@@ -109,3 +109,40 @@ export const forgotPassword = (email: string) => async (
     dispatch({ type: actions.RESEND_EMAIL_FAIL, payload: err.message });
   }
 };
+
+export const deleteUser = () => async (
+  dispatch: Dispatch<AppActions>,
+  getState: () => AppState,
+  { getFirebase, getFirestore }: any
+) => {
+  const firebase = getFirebase();
+  const firestore = getFirestore();
+  const user = firebase.auth().currentUser;
+  const userId = getState().firebase.auth.uid;
+
+  dispatch({ type: actions.AUTH_START });
+  try {
+    await firestore.collection('users').doc(userId).delete();
+
+    await firestore.collection('bodyParts').doc(userId).delete();
+
+    await firestore
+      .collection('exercises')
+      .where('userId', '==', userId)
+      .get()
+      .then(function (querySnapshot: any) {
+        var batch = firestore.batch();
+
+        querySnapshot.forEach(function (doc: any) {
+          batch.delete(doc.ref);
+        });
+
+        return batch.commit();
+      });
+    await user.delete();
+
+    dispatch({ type: actions.AUTH_SUCCESS });
+  } catch (err) {
+    dispatch({ type: actions.AUTH_FAIL, payload: err.message });
+  }
+};

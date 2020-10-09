@@ -91,6 +91,7 @@ export const addExercise = (exerciseName: string) => async (
             weight: '',
           },
         ],
+        userId: userId,
       });
 
     dispatch({ type: actions.ADD_DATA_SUCCESS });
