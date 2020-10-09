@@ -178,6 +178,7 @@ const Exercises: React.FC<ExercisesProps> = () => {
           <LineGraph title={`Progress on ${exerciseName}`} />
         )}
       </LowerContainer>
+
       <div>The graph for all the exercises of {exerciseName}</div>
 
       <Modal opened={modalOpened} close={() => setModalOpened(false)}>

@@ -3,11 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 export const Wrapper = styled(motion.div)`
-  height: calc(100vh - 4.5rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   margin: auto;
+  height: 30rem;
   width: 95%;
 `;
 
@@ -98,23 +95,19 @@ export const Split = styled.div`
 `;
 
 export const UpperContainer = styled.div`
-  background-color: ${(props) => props.theme.colors.mainContentBackground};
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-bottom: 1px solid red;
-  height: 90%;
-  margin-top: 2em;
+  border-bottom: 1px solid #2f3640;
+  margin-top: 2rem;
   overflow: hidden;
 `;
 
 export const LowerContainer = styled.div`
-  background-color: ${(props) => props.theme.colors.mainContentBackground};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 110%;
 `;
 
 export const FirstSelected = styled.div<{ isActive: boolean }>`

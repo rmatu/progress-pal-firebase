@@ -9,18 +9,33 @@ export const AuthWrapper = styled.main`
   background-color: ${(props) => props.theme.colors.mainContentBackground};
   color: ${(props) => props.theme.colors.primaryTextColor};
 
-  @media (max-width: 660px){
+  @media (max-width: 660px) {
     width: 100vw;
   }
 `;
 
 export const ContentWrapper = styled.main`
   width: 100%;
-  height: 100vh;
   background-color: ${(props) => props.theme.colors.mainContentBackground};
   color: ${(props) => props.theme.colors.primaryTextColor};
   display: block;
-  overflow: hidden;
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    background: #0d141f;
+    border-radius: 0 8px 8px 0;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #525861;
+    border-radius: 0 8px 8px 0;
+  }
+`;
+
+export const HeaderWrapper = styled.div`
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
 `;
 
 export const ToCloseNavbar = styled.div``;

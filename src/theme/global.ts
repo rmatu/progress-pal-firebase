@@ -38,11 +38,21 @@ body {
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-  overflow: hidden;
+  background-color: ${(props) => props.theme.colors.mainContentBackground};
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
 
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    line-height: 1.6;
+  ::-webkit-scrollbar {
+    width: 8px;
+    background: #0d141f;
+    border-radius: 0 0 0 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #525861;
+    border-radius: 0 0 0 8px;
+  }
 }
 
 /* Remove list styles on ul, ol elements with a class attribute */

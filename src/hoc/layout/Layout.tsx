@@ -1,7 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../../components/Navigation/Header/Header';
-import { AuthWrapper, ContentWrapper, ToCloseNavbar } from './Layout.styles';
+import {
+  AuthWrapper,
+  ContentWrapper,
+  ToCloseNavbar,
+  HeaderWrapper,
+} from './Layout.styles';
 import { cleanUp } from '../../redux/navbar/navbarActions';
 import { AppState } from '../../redux/rootReducer';
 
@@ -25,7 +30,9 @@ const Layout: React.FC<LayoutProps> = ({ children, authorized }) => {
   } else
     return (
       <ContentWrapper>
-        <Header />
+        <HeaderWrapper>
+          <Header />
+        </HeaderWrapper>
         <ToCloseNavbar onClick={() => handleCleanUp()}>
           {children}
         </ToCloseNavbar>
