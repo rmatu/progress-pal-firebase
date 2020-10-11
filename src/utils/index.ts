@@ -65,9 +65,15 @@ export const getDate = (): AppDate => {
 
   const date: AppDate = {
     year: today.getFullYear(),
-    month: today.getMonth() + 1,
+    month: today.getMonth(),
     day: today.getDate(),
   };
 
   return date;
+};
+
+export const getDayName = (date: Date) => {
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+  return days[date.getDay()];
 };

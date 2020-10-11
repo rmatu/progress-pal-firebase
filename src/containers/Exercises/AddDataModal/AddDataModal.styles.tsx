@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
 export const CallendarContainer = styled.div`
   width: 90%;
@@ -46,13 +46,14 @@ export const CallendarContainer = styled.div`
 `;
 
 export const Today = styled.div`
-  padding: 1rem;
+  padding: 1rem 2rem;
 
   p {
     color: ${({ theme }) => theme.colors.primaryTextColor};
   }
 
   @media (max-width: 500px) {
+    padding: 1rem;
     p {
       font-size: 1rem;
     }
@@ -60,13 +61,19 @@ export const Today = styled.div`
 `;
 
 export const Tomorrow = styled.div`
-  padding: 1rem;
+  padding: 1rem 2rem;
   cursor: pointer;
+  @media (max-width: 500px) {
+    padding: 1rem;
+  }
 `;
 
 export const Yesterday = styled.div`
-  padding: 1rem;
+  padding: 1rem 2rem;
   cursor: pointer;
+  @media (max-width: 500px) {
+    padding: 1rem;
+  }
 `;
 
 export const LeftArrow = styled.div`
@@ -86,5 +93,31 @@ export const RightArrow = styled.div`
     height: 32px;
     width: 32px;
     cursor: pointer;
+  }
+`;
+
+export const DataContainer = styled.div`
+  margin-top: 2rem;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const Wrapper = styled.div`
+  height: 40rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const SearchBodyPart = styled.div`
+  display: flex;
+  width: 300px;
+  flex-direction: column;
+
+  @media (max-width: 375px) {
+    width: 250px;
   }
 `;

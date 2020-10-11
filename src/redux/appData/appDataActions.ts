@@ -49,6 +49,7 @@ export const setNextDay = () => async (
   const { day, month, year } = getState().appData.currentDate;
 
   const result = addDays(new Date(year, month, day), 1);
+  console.log({ result });
 
   const newDate: actions.AppDate = {
     day: result.getDate(),

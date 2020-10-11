@@ -319,7 +319,7 @@ const Exercises: React.FC<ExercisesProps> = () => {
         opened={addDataModalOpened}
         close={() => dispatch(closeAddDataModal())}
       >
-        <AddDataModal></AddDataModal>
+        <AddDataModal content={content}></AddDataModal>
       </Modal>
     </Wrapper>
   );
