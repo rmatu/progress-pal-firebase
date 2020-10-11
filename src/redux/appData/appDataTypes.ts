@@ -9,6 +9,18 @@ export const CLOSE_RENAME_MODAL = 'CLOSE_RENAME_MODAL';
 export const CLOSE_ADD_DATA_MODAL = 'CLOSE_ADD_DATA_MODAL';
 export const OPEN_ADD_DATA_MODAL = 'OPEN_ADD_DATA_MODAL';
 
+export const SET_NEXT_DAY = 'SET_NEXT_DAY';
+export const SET_PREVIOUS_DAY = 'SET_PREVIOUS_DAY';
+
+export interface setNextDayAction {
+  type: typeof SET_NEXT_DAY;
+  payload: AppDate;
+}
+export interface setPreviousAction {
+  type: typeof SET_PREVIOUS_DAY;
+  payload: AppDate;
+}
+
 export interface openAddDataModalAction {
   type: typeof OPEN_ADD_DATA_MODAL;
 }
@@ -69,4 +81,6 @@ export type AppDataActionTypes =
   | selectBodyTypeNameAction
   | selectBodyTypeIdAction
   | selectExerciseIdAction
-  | selectExerciseNameAction;
+  | selectExerciseNameAction
+  | setPreviousAction
+  | setNextDayAction;

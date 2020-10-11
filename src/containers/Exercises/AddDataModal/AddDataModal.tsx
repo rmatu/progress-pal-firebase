@@ -1,4 +1,5 @@
 import React from 'react';
+import { addDays, subDays } from 'date-fns';
 
 import {
   CallendarContainer,
@@ -9,28 +10,35 @@ import {
   Yesterday,
 } from './AddDataModal.styles';
 import { RiArrowDownSLine } from 'react-icons/ri';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../redux/rootReducer';
+import {
+  setNextDay,
+  setPreviousDay,
+} from '../../../redux/appData/appDataActions';
 
 interface AddDataModalProps {}
 
-const AddDataModal: React.FC<AddDataModalProps> = ({}) => {
-  const { currentDate } = useSelector((state: AppState) => state.appData);
+const AddDataModal: React.FC<AddDataModalProps> = () => {
+  const { day, month, year } = useSelector(
+    (state: AppState) => state.appData.currentDate
+  );
+  const dispatch = useDispatch();
 
-  const today = `${currentDate.day}/${currentDate.month}/${currentDate.year}`;
-  const yesterday = `${currentDate.day - 1}/${currentDate.month}/${
-    currentDate.year
-  }`;
-  const tomorrow = `${currentDate.day + 1}/${currentDate.month}/${
-    currentDate.year
-  }`;
+  const today = `${day}/${month}/${year}`;
+
+  const tmpYesterday = subDays(new Date(year, month, day), 1);
+  const yesterday = `${tmpYesterday.getDate()}/${tmpYesterday.getMonth()}/${tmpYesterday.getFullYear()}`;
+
+  const tmpTomorrow = addDays(new Date(year, month, day), 1);
+  const tomorrow = `${tmpTomorrow.getDate()}/${tmpTomorrow.getMonth()}/${tmpTomorrow.getFullYear()}`;
 
   return (
     <CallendarContainer>
       <LeftArrow>
-        <RiArrowDownSLine />
+        <RiArrowDownSLine onClick={() => dispatch(setPreviousDay())} />
       </LeftArrow>
-      <Yesterday>
+      <Yesterday onClick={() => dispatch(setPreviousDay())}>
         <h2>Yesterday</h2>
         <p>{yesterday}</p>
       </Yesterday>
@@ -38,12 +46,12 @@ const AddDataModal: React.FC<AddDataModalProps> = ({}) => {
         <h1>Today</h1>
         <p>{today}</p>
       </Today>
-      <Tomorrow>
+      <Tomorrow onClick={() => dispatch(setNextDay())}>
         <h2>Tomorrow</h2>
         <p>{tomorrow}</p>
       </Tomorrow>
       <RightArrow>
-        <RiArrowDownSLine />
+        <RiArrowDownSLine onClick={() => dispatch(setNextDay())} />
       </RightArrow>
     </CallendarContainer>
   );

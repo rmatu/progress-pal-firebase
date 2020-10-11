@@ -10,12 +10,14 @@ export const CallendarContainer = styled.div`
   h1 {
     color: ${({ theme }) => theme.colors.primaryTextColor};
     text-align: center;
+    user-select: none;
   }
 
   h2 {
     color: ${({ theme }) => theme.colors.secondaryTextColor};
     transition: all 0.2s;
     text-align: center;
+    user-select: none;
 
     :hover {
       color: ${({ theme }) => theme.colors.primaryTextColor};
@@ -25,6 +27,7 @@ export const CallendarContainer = styled.div`
   p {
     text-align: center;
     color: ${({ theme }) => theme.colors.secondaryTextColor};
+    user-select: none;
   }
 
   @media (max-width: 500px) {
@@ -44,7 +47,7 @@ export const CallendarContainer = styled.div`
 
 export const Today = styled.div`
   padding: 1rem;
-  cursor: pointer;
+
   p {
     color: ${({ theme }) => theme.colors.primaryTextColor};
   }
@@ -72,6 +75,7 @@ export const LeftArrow = styled.div`
   svg {
     height: 32px;
     width: 32px;
+    cursor: pointer;
   }
 `;
 
@@ -81,5 +85,6 @@ export const RightArrow = styled.div`
   svg {
     height: 32px;
     width: 32px;
+    cursor: pointer;
   }
 `;

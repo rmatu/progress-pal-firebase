@@ -60,6 +60,18 @@ export default (state = initialState, action: AppDataActionTypes) => {
         addDataModalOpened: false,
       };
 
+    case actions.SET_PREVIOUS_DAY:
+      return {
+        ...state,
+        currentDate: action.payload,
+      };
+
+    case actions.SET_NEXT_DAY:
+      return {
+        ...state,
+        currentDate: action.payload,
+      };
+
     default:
       return state;
   }
