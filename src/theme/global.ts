@@ -103,6 +103,7 @@ html{
   --errorTextColor: ${(props) => props.theme.colors.errorTextColor}
   --successTextcolor: ${(props) => props.theme.colors.successTextColor}
   --headerBackground: ${(props) => props.theme.colors.headerBackground}
+  --grayBackground: ${(props) => props.theme.colors.grayBackground}
 
 
   @media ${(props) => props.theme.mediaQueries.smallest} {

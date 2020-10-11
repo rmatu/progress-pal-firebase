@@ -4,6 +4,7 @@ const theme = {
     mainContentBackground: '#1d2127',
     rightSidebarBackground: '#191C23',
     headerBackground: '#21283e',
+    grayBackground: '#2f3640',
     modalBackground: '#201A30',
     inputBackground: '#38304c',
     primaryTextColor: '#fff',

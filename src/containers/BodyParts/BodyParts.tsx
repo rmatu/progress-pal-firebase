@@ -85,7 +85,10 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
             key={item.id}
             id={item.id}
             value={item.name}
-            close={() => setIsActiveDropdown(!isActiveDropdown)}
+            close={() => {
+              setIsActiveDropdown(!isActiveDropdown);
+              setIsActiveSelected(!isActiveSelected);
+            }}
           />
         ));
     } else {
@@ -94,7 +97,10 @@ const BodyParts: React.FC<BodyPartsProps> = () => {
           key={'0dksa-dkas--a0ksd'}
           id={'0dksa-dkas--a0ksd'}
           value={'No exercises...'}
-          close={() => setIsActiveDropdown(!isActiveDropdown)}
+          close={() => {
+            setIsActiveDropdown(!isActiveDropdown);
+            setIsActiveSelected(!isActiveSelected);
+          }}
         />
       );
     }

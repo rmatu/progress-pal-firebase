@@ -100,6 +100,7 @@ export const UpperContainer = styled.div`
   align-items: center;
   border-bottom: 1px solid #2f3640;
   margin-top: 2rem;
+  height: 30rem;
   overflow: hidden;
 `;
 

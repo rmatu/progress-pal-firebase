@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../redux/rootReducer';
 import { cleanUp } from '../../redux/navbar/navbarActions';
-import { closeRenameModal } from '../../redux/appData/appDataActions';
+import {
+  closeAddDataModal,
+  closeRenameModal,
+  openAddDataModal,
+} from '../../redux/appData/appDataActions';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import * as Yup from 'yup';
 import * as ROUTES from '../../constants/routes';
@@ -25,6 +29,7 @@ import {
   Split,
   SearchBodyPart,
   IconWrapper,
+  AddDataButton,
 } from './Exercises.styles';
 import Modal from '../../components/UI/Modal/Modal';
 import { Field, Formik } from 'formik';
@@ -38,6 +43,7 @@ import { checkIfAll } from '../../utils';
 import LineGraph from '../../components/UI/Graphs/LineGraph/LineGraph';
 import Exercise from './Exercise/Exercise';
 import Loader from '../../components/UI/Loader/Loader';
+import AddDataModal from './AddDataModal/AddDataModal';
 
 const ExerciseSchema = Yup.object().shape({
   name: Yup.string().required(`Your input is empty.`).min(1),
@@ -55,9 +61,12 @@ const Exercises: React.FC<ExercisesProps> = () => {
   const [isActiveDropdown, setIsActiveDropdown] = useState<boolean>(false);
   const [isActiveSelected, setIsActiveSelected] = useState<boolean>(false);
   const userId = useSelector((state: AppState) => state.firebase.auth.uid);
-  const { bodyTypeName, exerciseName, renamingModalOpened } = useSelector(
-    (state: AppState) => state.appData
-  );
+  const {
+    bodyTypeName,
+    exerciseName,
+    renamingModalOpened,
+    addDataModalOpened,
+  } = useSelector((state: AppState) => state.appData);
 
   const dispatch = useDispatch();
 
@@ -103,7 +112,10 @@ const Exercises: React.FC<ExercisesProps> = () => {
             key={item.id}
             id={item.id}
             value={item.name}
-            close={() => setIsActiveDropdown(!isActiveDropdown)}
+            close={() => {
+              setIsActiveDropdown(!isActiveDropdown);
+              setIsActiveSelected(!isActiveSelected);
+            }}
           />
         ));
     } else {
@@ -112,7 +124,10 @@ const Exercises: React.FC<ExercisesProps> = () => {
           key={'0dksa-dkas--a0ksd'}
           id={'0dksa-dkas--a0ksd'}
           value={'No exercises...'}
-          close={() => setIsActiveDropdown(!isActiveDropdown)}
+          close={() => {
+            setIsActiveDropdown(!isActiveDropdown);
+            setIsActiveSelected(!isActiveSelected);
+          }}
         />
       );
     }
@@ -170,6 +185,10 @@ const Exercises: React.FC<ExercisesProps> = () => {
             <HiPlusCircle />
           </IconWrapper>
         </Split>
+
+        <AddDataButton onClick={() => dispatch(openAddDataModal())}>
+          Add data
+        </AddDataButton>
       </UpperContainer>
       <LowerContainer>
         {checkIfAll(exerciseName) ? (
@@ -177,9 +196,9 @@ const Exercises: React.FC<ExercisesProps> = () => {
         ) : (
           <LineGraph title={`Progress on ${exerciseName}`} />
         )}
-      </LowerContainer>
 
-      <div>The graph for all the exercises of {exerciseName}</div>
+        <div>The graph for all the exercises of {exerciseName}</div>
+      </LowerContainer>
 
       <Modal opened={modalOpened} close={() => setModalOpened(false)}>
         <Formik
@@ -294,6 +313,13 @@ const Exercises: React.FC<ExercisesProps> = () => {
             </>
           )}
         </Formik>
+      </Modal>
+
+      <Modal
+        opened={addDataModalOpened}
+        close={() => dispatch(closeAddDataModal())}
+      >
+        <AddDataModal></AddDataModal>
       </Modal>
     </Wrapper>
   );

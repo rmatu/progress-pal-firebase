@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { AppDate } from '../redux/appData/appDataTypes';
 
 export const populateBodyParts = () => {
   return [
@@ -57,4 +58,16 @@ export const checkIfAll = (name: string) => {
   } else {
     return false;
   }
+};
+
+export const getDate = (): AppDate => {
+  const today = new Date();
+
+  const date: AppDate = {
+    year: today.getFullYear(),
+    month: today.getMonth() + 1,
+    day: today.getDate(),
+  };
+
+  return date;
 };

@@ -1,13 +1,18 @@
 import { appDataState, AppDataActionTypes } from './appDataTypes';
 import * as actions from './appDataTypes';
+import { getDate } from '../../utils';
+
+const date = getDate();
 
 const initialState: appDataState = {
   bodyTypeName: 'Chest',
+  exerciseName: 'All',
   bodyTypeId: '',
   exerciseId: '',
-  exerciseName: 'All',
-  renamingModalOpened: false,
   targetName: '',
+  renamingModalOpened: false,
+  addDataModalOpened: false,
+  currentDate: date,
 };
 
 export default (state = initialState, action: AppDataActionTypes) => {
@@ -43,6 +48,16 @@ export default (state = initialState, action: AppDataActionTypes) => {
         ...state,
         renamingModalOpened: false,
         targetName: '',
+      };
+    case actions.OPEN_ADD_DATA_MODAL:
+      return {
+        ...state,
+        addDataModalOpened: true,
+      };
+    case actions.CLOSE_ADD_DATA_MODAL:
+      return {
+        ...state,
+        addDataModalOpened: false,
       };
 
     default:

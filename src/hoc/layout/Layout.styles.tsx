@@ -19,23 +19,13 @@ export const ContentWrapper = styled.main`
   background-color: ${(props) => props.theme.colors.mainContentBackground};
   color: ${(props) => props.theme.colors.primaryTextColor};
   display: block;
-
-  ::-webkit-scrollbar {
-    width: 8px;
-    background: #0d141f;
-    border-radius: 0 8px 8px 0;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #525861;
-    border-radius: 0 8px 8px 0;
-  }
 `;
 
 export const HeaderWrapper = styled.div`
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
+  z-index: 100;
 `;
 
 export const ToCloseNavbar = styled.div``;

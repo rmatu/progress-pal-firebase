@@ -116,7 +116,7 @@ export const UpperContainer = styled.div`
   height: 30rem;
   flex-direction: column;
   align-items: center;
-  border-bottom: 1px solid #2f3640;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grayBackground};
   margin-top: 2rem;
   overflow: hidden;
 `;
@@ -152,6 +152,18 @@ export const FirstSelected = styled.div<{ isActive: boolean }>`
 
     transition: all 0.4s;
   }
+`;
+
+export const AddDataButton = styled.button`
+  padding: 12px 24px;
+  cursor: pointer;
+  background-color: ${({ theme }) => theme.colors.specialTextColor};
+  border-radius: 8px;
+  border: 0;
+  color: ${({ theme }) => theme.colors.mainContentBackground};
+  font-weight: bolder;
+  margin-top: 1rem;
+  text-align: center;
 `;
 
 export const OptionsContainer = styled.div<{ isActive: boolean }>`

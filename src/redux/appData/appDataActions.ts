@@ -28,3 +28,11 @@ export const openRenameModal = (targetName: string) => ({
 export const closeRenameModal = () => ({
   type: actions.CLOSE_RENAME_MODAL,
 });
+
+export const openAddDataModal = () => ({
+  type: actions.OPEN_ADD_DATA_MODAL,
+});
+
+export const closeAddDataModal = () => ({
+  type: actions.CLOSE_ADD_DATA_MODAL,
+});
